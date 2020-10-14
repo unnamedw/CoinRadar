@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">CoinRadar</string>
+
+    //admob
+    <string name="admob_app_id">ca-app-pub-4385372841380246~1730762372</string>
+    <string name="admob_interstitialad_id">ca-app-pub-4385372841380246/9588414550</string>
+    <string name="test_admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="test_admob_interstitialad_id">ca-app-pub-3940256099942544/1033173712</string>
+
+    //bottom navigation
+    <string name="title_home">Home</string>
+    <string name="title_notification">Notification</string>
+    <string name="title_news">News</string>
+    <string name="title_setting">Setting</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
 </resources>
