@@ -1,9 +1,13 @@
 package kr.co.douchgosum.android.coinradar
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -84,6 +88,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 }
