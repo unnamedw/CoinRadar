@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "565506878959",
+    "firebase_url": "https://coinradar-3ae29.firebaseio.com",
+    "project_id": "coinradar-3ae29",
+    "storage_bucket": "coinradar-3ae29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565506878959:android:05c8f7acb951a1c6951a1a",
+        "android_client_info": {
+          "package_name": "kr.co.douchgosum.android.coinradar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565506878959-dplae9gf0i5mffeasqne8j3ggibp1kig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN_-2Hm-8CyuefvrV71dJ7uk6QQL0a70I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565506878959-dplae9gf0i5mffeasqne8j3ggibp1kig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

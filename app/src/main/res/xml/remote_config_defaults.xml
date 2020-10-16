@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<!DOCTYPE defaultsMap [
+    <!ENTITY default "defaultdata">
+]>
+
+<defaultsMap>
+    <entry>
+        <key>lottery_data</key>
+        <value>No Json Data</value>
+    </entry>
+</defaultsMap>
+    <!-- END xml_defaults -->
