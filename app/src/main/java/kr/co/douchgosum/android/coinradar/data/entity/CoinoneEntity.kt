@@ -1,8 +1,6 @@
 package kr.co.douchgosum.android.coinradar.data.entity
 
 import com.squareup.moshi.Json
-import kr.co.douchgosum.android.coinradar.data.Ticker
-import kr.co.douchgosum.android.coinradar.data.Tickerizable
 
 data class CoinoneTicker(
     val currency: String,

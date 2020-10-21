@@ -1,18 +1,11 @@
 package kr.co.douchgosum.android.coinradar.data.entity
 
-import android.util.SparseArray
-import com.google.android.material.internal.ParcelableSparseArray
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import kr.co.douchgosum.android.coinradar.data.Ticker
-import kr.co.douchgosum.android.coinradar.data.Tickerizable
 
 data class BithumbTickerResponse(
     val status: String,
     val data: Map<String, Any>
 )
-
-
 
 data class BithumbTicker(
     @Json(name ="opening_price") val openingPrice: String,

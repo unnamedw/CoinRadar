@@ -7,11 +7,17 @@
     <string name="test_admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
     <string name="test_admob_interstitialad_id">ca-app-pub-3940256099942544/1033173712</string>
 
-    //bottom navigation
-    <string name="title_home">Home</string>
-    <string name="title_notification">Notification</string>
-    <string name="title_news">News</string>
-    <string name="title_setting">Setting</string>
+    //bottom navigation main titles
+    <string name="main1_title">Home</string>
+    <string name="main2_title">Notification</string>
+    <string name="main3_title"></string>
+    <string name="main4_title">News</string>
+    <string name="main5_title">Setting</string>
+
+    //main1 tab titles
+    <string name="main1_sub1_title">sub1</string>
+    <string name="main1_sub2_title">sub2</string>
+    <string name="main1_sub3_title">sub3</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_button">Dummy Button</string>

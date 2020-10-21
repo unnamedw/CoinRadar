@@ -1,12 +1,13 @@
-package kr.co.douchgosum.android.coinradar
+package kr.co.douchgosum.android.coinradar.ui.main2
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kr.co.douchgosum.android.coinradar.R
 import kr.co.douchgosum.android.coinradar.ui.BaseFragment
 
-class Main3Fragment : BaseFragment() {
+class NewsFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +17,7 @@ class Main3Fragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_main3, container, false)
+        val view = inflater.inflate(R.layout.fragment_news, container, false)
         return view
     }
 

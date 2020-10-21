@@ -1,13 +1,10 @@
 package kr.co.douchgosum.android.coinradar
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -17,31 +14,35 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
-import kotlinx.android.synthetic.main.activity_main.*
+import kr.co.douchgosum.android.coinradar.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var mInterstitialAd: InterstitialAd
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.CustomAppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        initView()
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val bottomNav = binding.bottomNav
+
+        //init bottom navigation
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(bottomNav.menu)
+        bottomNav
+            .setupWithNavController(navController)
 
         //전면광고 표시
 //        showAd(R.string.admob_interstitialad_id)
     }
 
-    private fun initView() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        appBarConfiguration = AppBarConfiguration(bottom_nav.menu)
-        bottom_nav
-            .setupWithNavController(navController)
-    }
 
+    /**
+     * Fragment 의 백스택이 남아있지 않은 경우에만 앱 종료
+     * */
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
         if (count == 0) {
@@ -51,7 +52,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //광고표시
+    /**
+     * 광고표시
+     * */
     private fun showAd(adId: Int) {
         val adResource = resources.getString(adId)
         mInterstitialAd = InterstitialAd(this)
@@ -68,7 +71,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //리모트 컨픽 초기화
+    /**
+     * Remote config 초기화
+     * */
     private fun initRemoteConfig() {
         val remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {

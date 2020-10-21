@@ -1,8 +1,5 @@
 package kr.co.douchgosum.android.coinradar.data.entity
 
-import kr.co.douchgosum.android.coinradar.data.Ticker
-import kr.co.douchgosum.android.coinradar.data.Tickerizable
-
 data class HuobiTickerResponse(
     val status: String,
     val ts: Long,
@@ -18,4 +15,4 @@ data class HuobiTicker(
     val high: Double,
     val vol: Double,
     val symbol: String
-)
+) 

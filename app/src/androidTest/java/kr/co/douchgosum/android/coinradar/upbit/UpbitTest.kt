@@ -3,12 +3,10 @@ package kr.co.douchgosum.android.coinradar.upbit
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
 import kr.co.douchgosum.android.coinradar.data.Ticker
 import kr.co.douchgosum.android.coinradar.data.api.UpbitApi
 import kr.co.douchgosum.android.coinradar.data.entity.UpbitMarket
-import kr.co.douchgosum.android.coinradar.upbit.OrderBookApi
 import org.json.JSONArray
 import org.junit.Test
 
@@ -19,16 +17,17 @@ class UpbitTest {
         val marketList = getAllMarkets().map {
             it.market
         }.toList()
-        UpbitApi.retrofitService.getTickers(markets = marketList)
+        UpbitApi.service.getTickers(markets = marketList)
             .map { upbitTicker ->
                 val marketSymbol = upbitTicker.market.split("-")
-                val ticker = Ticker(
-                    baseCurrency = marketSymbol[1],
-                    quoteCurrency = marketSymbol[0],
-                    openPrice = upbitTicker.openingPrice,
-                    closePrice = upbitTicker.tradePrice,
-                    timeStamp = upbitTicker.timestamp
-                )
+                val ticker =
+                    Ticker(
+                        baseCurrency = marketSymbol[1],
+                        quoteCurrency = marketSymbol[0],
+                        openPrice = upbitTicker.openingPrice,
+                        closePrice = upbitTicker.tradePrice,
+                        timeStamp = upbitTicker.timestamp
+                    )
                 println(ticker)
             }
         println(System.currentTimeMillis())
@@ -37,7 +36,7 @@ class UpbitTest {
     //    @Test
     fun upbitApiTest() = runBlocking {
         val markets = listOf("krw-btc","krw-eth","krw-btt")
-        val result = UpbitApi.retrofitService.getTickers(markets)
+        val result = UpbitApi.service.getTickers(markets)
         println("result= ${JSONArray(result).length()}")
     }
 
@@ -57,7 +56,7 @@ class UpbitTest {
 
 
     suspend fun getAllMarkets(): Flow<UpbitMarket> = flow {
-        UpbitApi.retrofitService.getAllMarkets()
+        UpbitApi.service.getAllMarkets()
             .map {upbitMarket ->
                 emit(upbitMarket)
             }

@@ -5,13 +5,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kr.co.douchgosum.android.coinradar.data.Exchange
 import kr.co.douchgosum.android.coinradar.data.Ticker
 import kr.co.douchgosum.android.coinradar.data.api.HuobiApiService
 
-class HuobiDataRepository (
+class HuobiRepository (
     context: Context,
     private val huobiApiService: HuobiApiService
-): DataRepository(context) {
+): Repository(context) {
 
     override suspend fun getAllTickers(): Flow<Ticker> = flow {
         if (isNetworkAvailable()) {
@@ -20,13 +21,14 @@ class HuobiDataRepository (
                     val timestamp = ts
                     data.map { huobiTicker ->
                         val dividedSymbol = divideHuobiSymbol(huobiTicker.symbol)
-                        val ticker = Ticker(
-                            baseCurrency = dividedSymbol[0],
-                            quoteCurrency = dividedSymbol[1],
-                            openPrice = huobiTicker.open,
-                            closePrice = huobiTicker.close,
-                            timeStamp = timestamp
-                        )
+                        val ticker =
+                            Ticker(
+                                baseCurrency = dividedSymbol[0],
+                                quoteCurrency = dividedSymbol[1],
+                                openPrice = huobiTicker.open,
+                                closePrice = huobiTicker.close,
+                                timeStamp = timestamp
+                            )
                         emit(ticker)
                     }
                 }

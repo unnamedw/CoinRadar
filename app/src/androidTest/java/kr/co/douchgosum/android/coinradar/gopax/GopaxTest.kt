@@ -10,7 +10,7 @@ class GopaxTest {
     }
 //    suspend fun gopaxFlow(): Flow<Ticker> = flow {
 //        if (true) {
-//            GopaxApi.retrofitService.getTickers()
+//            GopaxApi.service.getTickers()
 //                .map {
 //                    val currency = it.name.split('-')
 //                    val timeStamp = dateToMillis(it.time, Exchange.GOPAX)

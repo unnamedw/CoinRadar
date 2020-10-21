@@ -23,10 +23,10 @@ abstract class BaseFragment: Fragment() {
         val navController = findNavController()
         val appBarConfiguration = (activity as MainActivity).appBarConfiguration
         val toolbarId = when (this.javaClass.simpleName) {
-            "HomeFragment" -> R.id.toolbar_home
-            "Main2Fragment" -> R.id.toolbar_notification
-            "Main3Fragment" -> R.id.toolbar_news
-            "Main4Fragment" -> R.id.toolbar_setting
+//            "HomeFragment" -> R.id.toolbar_home
+            "NotificationFragment" -> R.id.toolbar_notification
+            "NewsFragment" -> R.id.toolbar_news
+            "SettingFragment" -> R.id.toolbar_setting
             else -> return
         }
         val toolbar = view.findViewById<Toolbar>(toolbarId)

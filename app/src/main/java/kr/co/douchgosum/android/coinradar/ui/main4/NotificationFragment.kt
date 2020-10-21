@@ -1,4 +1,4 @@
-package kr.co.douchgosum.android.coinradar.ui.notification
+package kr.co.douchgosum.android.coinradar.ui.main4
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,5 +24,8 @@ class NotificationFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        println("2파괴")
+    }
 }

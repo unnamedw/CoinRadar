@@ -3,39 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/Home">
+    app:startDestination="@id/main1">
     <fragment
-        android:id="@+id/Home"
-        android:name="kr.co.douchgosum.android.coinradar.ui.home.HomeFragment"
+        android:id="@+id/main1"
+        android:name="kr.co.douchgosum.android.coinradar.ui.main1.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_Home_to_testFragment"
-            app:destination="@id/testFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
     <fragment
-        android:id="@+id/Notification"
-        android:name="kr.co.douchgosum.android.coinradar.ui.notification.NotificationFragment"
+        android:id="@+id/main3"
+        android:name="kr.co.douchgosum.android.coinradar.ui.main3.TestFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test"/>
+    <fragment
+        android:id="@+id/main2"
+        android:name="kr.co.douchgosum.android.coinradar.ui.main4.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification" />
     <fragment
-        android:id="@+id/News"
-        android:name="kr.co.douchgosum.android.coinradar.Main3Fragment"
+        android:id="@+id/main4"
+        android:name="kr.co.douchgosum.android.coinradar.ui.main2.NewsFragment"
         android:label="NewsFragment"
-        tools:layout="@layout/fragment_main3" />
+        tools:layout="@layout/fragment_news" />
     <fragment
-        android:id="@+id/Setting"
-        android:name="kr.co.douchgosum.android.coinradar.ui.setting.SettingFragment"
+        android:id="@+id/main5"
+        android:name="kr.co.douchgosum.android.coinradar.ui.main5.SettingFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting" />
-    <fragment
-        android:id="@+id/testFragment"
-        android:name="kr.co.douchgosum.android.coinradar.TestFragment"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test">
-        <argument
-            android:name="id"
-            app:argType="string" />
-    </fragment>
+
 
 </navigation>

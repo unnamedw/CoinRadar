@@ -26,7 +26,7 @@ class HuobiTest {
 
     suspend fun getAllTickers(): Flow<Ticker> = flow {
         if (true) {
-            HuobiApi.retrofitService.getTickers()
+            HuobiApi.service.getTickers()
                 .run {
                     val timestamp = ts
                     data.map { huobiTicker ->
@@ -35,13 +35,14 @@ class HuobiTest {
                                 println("후오비 심볼: ${huobiTicker.symbol}")
                             }
                         }
-                        val ticker = Ticker(
-                            baseCurrency = dividedSymbol[0],
-                            quoteCurrency = dividedSymbol[1],
-                            openPrice = huobiTicker.open,
-                            closePrice = huobiTicker.close,
-                            timeStamp = timestamp
-                        )
+                        val ticker =
+                            Ticker(
+                                baseCurrency = dividedSymbol[0],
+                                quoteCurrency = dividedSymbol[1],
+                                openPrice = huobiTicker.open,
+                                closePrice = huobiTicker.close,
+                                timeStamp = timestamp
+                            )
                         emit(ticker)
                     }
                 }

@@ -7,7 +7,7 @@ import android.os.Build
 import kotlinx.coroutines.flow.Flow
 import kr.co.douchgosum.android.coinradar.data.Ticker
 
-abstract class DataRepository(
+abstract class Repository(
     private val context: Context
 ) {
 
@@ -20,6 +20,7 @@ abstract class DataRepository(
         var result = false
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        //마시멜로 이상
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val networkCapabilities = connectivityManager.activeNetwork ?: return false
             val actNw =
@@ -30,7 +31,9 @@ abstract class DataRepository(
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
                 else -> false
             }
-        } else {
+        }
+        //마시멜로 미만
+        else {
             connectivityManager.run {
                 connectivityManager.activeNetworkInfo?.run {
                     result = when (type) {

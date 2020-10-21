@@ -4,18 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Main3Fragment">
+    tools:context=".ui.main2.NewsFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_news"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
-            android:text="@string/title_news" />
+            android:text="@string/main4_title" />
     </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>

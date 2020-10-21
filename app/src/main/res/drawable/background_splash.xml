@@ -5,11 +5,7 @@
         android:drawable="@android:color/background_light"/>
     <item
         android:drawable="@mipmap/ic_logo"
-        android:gravity="center"
-        android:bottom="40dp"
-        android:left="40dp"
-        android:right="40dp"
-        android:top="40dp"/>
+        android:gravity="center"/>
 
 <!--    <item>-->
 <!--        <bitmap-->

@@ -22,7 +22,7 @@ class BitthumbTest {
 
     }
     suspend fun bithumbFlow(): Flow<Ticker> = flow{
-        BithumbApi.retrofitService.getTickers()
+        BithumbApi.service.getTickers()
             //응답실패 체크
             .also {
                 if (it.status != "0000") {
@@ -41,13 +41,14 @@ class BitthumbTest {
                             .build()
                         val adapter = moshi.adapter(BithumbTicker::class.java)
                         val bithumbTicker = adapter.fromJsonValue(it.value)!!
-                        val ticker = Ticker(
-                            baseCurrency = it.key,
-                            quoteCurrency = "krw",
-                            openPrice = bithumbTicker.openingPrice.toDouble(),
-                            closePrice = bithumbTicker.closingPrice.toDouble(),
-                            timeStamp = date
-                        )
+                        val ticker =
+                            Ticker(
+                                baseCurrency = it.key,
+                                quoteCurrency = "krw",
+                                openPrice = bithumbTicker.openingPrice.toDouble(),
+                                closePrice = bithumbTicker.closingPrice.toDouble(),
+                                timeStamp = date
+                            )
                         println("티커 = $ticker")
                         emit(ticker)
                     }

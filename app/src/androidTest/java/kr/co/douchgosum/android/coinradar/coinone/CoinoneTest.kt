@@ -25,7 +25,7 @@ class CoinoneTest {
     }
     suspend fun coinoneFlow(): Flow<Ticker> = flow {
         if (true) {
-            CoinoneApi.retrofitService.getTickers()
+            CoinoneApi.service.getTickers()
                 .run {
                     val result = (get("result") as String)
                     val errorCode = (get("errorCode") as String).toInt()
@@ -41,13 +41,14 @@ class CoinoneTest {
                             .build()
                         val adapter = moshi.adapter(CoinoneTicker::class.java)
                         val coinoneTicker = adapter.fromJsonValue(it.value)!!
-                        val ticker = Ticker(
-                            baseCurrency = it.key,
-                            quoteCurrency = "krw",
-                            openPrice = coinoneTicker.first,
-                            closePrice = coinoneTicker.last,
-                            timeStamp = timestamp*1000
-                        )
+                        val ticker =
+                            Ticker(
+                                baseCurrency = it.key,
+                                quoteCurrency = "krw",
+                                openPrice = coinoneTicker.first,
+                                closePrice = coinoneTicker.last,
+                                timeStamp = timestamp * 1000
+                            )
                         emit(ticker)
                     }
                 }
