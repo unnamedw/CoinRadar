@@ -16,7 +16,7 @@ import kr.co.douchgosum.android.coinradar.di.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class MyApplication: Application() {
+class AppApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         //AdMob Init
