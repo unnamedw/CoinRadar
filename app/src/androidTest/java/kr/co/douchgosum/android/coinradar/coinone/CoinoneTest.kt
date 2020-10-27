@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.runBlocking
 import kr.co.douchgosum.android.coinradar.data.Ticker
 import kr.co.douchgosum.android.coinradar.data.api.CoinoneApi
-import kr.co.douchgosum.android.coinradar.data.entity.CoinoneTicker
+import kr.co.douchgosum.android.coinradar.data.remote.entity.CoinoneTicker
 
 class CoinoneTest {
     //    @Test

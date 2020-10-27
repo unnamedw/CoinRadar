@@ -1,4 +1,4 @@
-package kr.co.douchgosum.android.coinradar.data.entity
+package kr.co.douchgosum.android.coinradar.data.remote.entity
 
 import com.squareup.moshi.Json
 

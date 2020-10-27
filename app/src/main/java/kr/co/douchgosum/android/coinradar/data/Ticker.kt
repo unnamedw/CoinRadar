@@ -1,9 +1,8 @@
 package kr.co.douchgosum.android.coinradar.data
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kr.co.douchgosum.android.coinradar.data.Exchange
+import java.util.*
 
 @Entity(tableName = "tickers")
 data class Ticker (

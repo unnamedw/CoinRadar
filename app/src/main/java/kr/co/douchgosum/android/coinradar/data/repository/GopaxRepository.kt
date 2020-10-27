@@ -7,17 +7,17 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kr.co.douchgosum.android.coinradar.data.Exchange
 import kr.co.douchgosum.android.coinradar.data.Ticker
-import kr.co.douchgosum.android.coinradar.data.api.GopaxApiService
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.GopaxTickerApiService
 import kr.co.douchgosum.android.coinradar.utils.dateToMillis
 
 class GopaxRepository(
     context: Context,
-    private val gopaxApiService: GopaxApiService
+    private val gopaxTickerApiService: GopaxTickerApiService
 ): Repository(context) {
 
-    override suspend fun getAllTickers(): Flow<Ticker> = flow {
+    suspend fun getAllTickers(): Flow<Ticker> = flow {
         if (isNetworkAvailable()) {
-            gopaxApiService.getTickers()
+            gopaxTickerApiService.getTickers()
                 .map {
                     val currency = it.name.split('-')
                     val timeStamp = dateToMillis(it.time, Exchange.GOPAX)

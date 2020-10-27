@@ -11,8 +11,6 @@ abstract class Repository(
     private val context: Context
 ) {
 
-    abstract suspend fun getAllTickers(): Flow<Ticker>
-
     /**
      * 네트워크 상태 확인
      * */

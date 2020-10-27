@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import kr.co.douchgosum.android.coinradar.data.Ticker
 import kr.co.douchgosum.android.coinradar.data.api.BithumbApi
-import kr.co.douchgosum.android.coinradar.data.entity.BithumbTicker
+import kr.co.douchgosum.android.coinradar.data.remote.entity.BithumbTicker
 
 class BitthumbTest {
     //    @Test

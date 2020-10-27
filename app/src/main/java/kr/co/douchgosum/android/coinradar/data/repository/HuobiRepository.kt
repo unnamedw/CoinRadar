@@ -5,18 +5,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kr.co.douchgosum.android.coinradar.data.Exchange
 import kr.co.douchgosum.android.coinradar.data.Ticker
-import kr.co.douchgosum.android.coinradar.data.api.HuobiApiService
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.HuobiTickerApiService
 
 class HuobiRepository (
     context: Context,
-    private val huobiApiService: HuobiApiService
+    private val huobiTickerApiService: HuobiTickerApiService
 ): Repository(context) {
 
-    override suspend fun getAllTickers(): Flow<Ticker> = flow {
+    suspend fun getAllTickers(): Flow<Ticker> = flow {
         if (isNetworkAvailable()) {
-            huobiApiService.getTickers()
+            huobiTickerApiService.getTickers()
                 .run {
                     val timestamp = ts
                     data.map { huobiTicker ->

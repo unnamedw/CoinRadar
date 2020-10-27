@@ -3,32 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/main1">
+    app:startDestination="@id/bottom_menu_item1">
     <fragment
-        android:id="@+id/main1"
-        android:name="kr.co.douchgosum.android.coinradar.ui.main1.HomeFragment"
+        android:id="@+id/bottom_menu_item1"
+        android:name="kr.co.douchgosum.android.coinradar.ui.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
     <fragment
-        android:id="@+id/main3"
-        android:name="kr.co.douchgosum.android.coinradar.ui.main3.TestFragment"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test"/>
-    <fragment
-        android:id="@+id/main2"
-        android:name="kr.co.douchgosum.android.coinradar.ui.main4.NotificationFragment"
+        android:id="@+id/bottom_menu_item2"
+        android:name="kr.co.douchgosum.android.coinradar.ui.notification.NotificationFragment"
         android:label="NotificationFragment"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_notification"/>
     <fragment
-        android:id="@+id/main4"
-        android:name="kr.co.douchgosum.android.coinradar.ui.main2.NewsFragment"
-        android:label="NewsFragment"
-        tools:layout="@layout/fragment_news" />
+        android:id="@+id/bottom_menu_item3"
+        android:name="kr.co.douchgosum.android.coinradar.ui.radar.TestFragment"
+        android:label="TestFragment"
+        tools:layout="@layout/fragment_test" />
     <fragment
-        android:id="@+id/main5"
-        android:name="kr.co.douchgosum.android.coinradar.ui.main5.SettingFragment"
+        android:id="@+id/bottom_menu_item4"
+        android:name="kr.co.douchgosum.android.coinradar.ui.community.CommunityFragment"
+        android:label="CommunityFragment"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/bottom_menu_item5"
+        android:name="kr.co.douchgosum.android.coinradar.ui.info.InfoFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_info" />
 
 
 </navigation>

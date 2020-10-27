@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main5.SettingFragment">
+    tools:context=".ui.community.CommunityFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_setting"
+        android:id="@+id/toolbar_news"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <TextView
@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
-            android:text="@string/main5_title" />
+            android:text="@string/bottom_menu_community_title" />
     </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>

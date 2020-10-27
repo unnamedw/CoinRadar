@@ -1,4 +1,4 @@
-package kr.co.douchgosum.android.coinradar.ui.main2
+package kr.co.douchgosum.android.coinradar.ui.notification
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import kr.co.douchgosum.android.coinradar.R
 import kr.co.douchgosum.android.coinradar.ui.BaseFragment
 
-class NewsFragment : BaseFragment() {
+class NotificationFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,13 +17,15 @@ class NewsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_news, container, false)
+        val view = inflater.inflate(R.layout.fragment_notification, container, false)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        println("2파괴")
+    }
 }

@@ -9,18 +9,25 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kr.co.douchgosum.android.coinradar.data.Exchange
 import kr.co.douchgosum.android.coinradar.data.Ticker
-import kr.co.douchgosum.android.coinradar.data.api.BithumbApiService
-import kr.co.douchgosum.android.coinradar.data.db.AppDatabase
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.BithumbTickerApiService
 import kr.co.douchgosum.android.coinradar.data.db.TickerDao
-import kr.co.douchgosum.android.coinradar.data.entity.BithumbTicker
+import kr.co.douchgosum.android.coinradar.data.remote.entity.BithumbTicker
+import org.koin.java.KoinJavaComponent.get
 
+/**
+ * Mapper 를 쓰지 않고
+ * Repository 에 API Entity 와 Domain Model 을 Mapping 하는 작업을 구현
+ *
+ * */
 class BithumbRepository(
     context: Context,
-    private val bithumbApiService: BithumbApiService,
+    private val bithumbTickerApiService: BithumbTickerApiService,
     private val bithumbDao: TickerDao
 ): Repository(context) {
+
+    val moshi = get(Moshi::class.java)
+
 
     fun getAll(): LiveData<List<Ticker>> {
         return bithumbDao.getAllTickers()
@@ -29,7 +36,7 @@ class BithumbRepository(
     suspend fun update() {
         //네트워크 연결 가능한 경우
         if (isNetworkAvailable()) {
-            bithumbApiService.getTickers()
+            bithumbTickerApiService.getTickers()
                 .also {
                     if (it.status != "0000") {
                         Log.d("TAG", "status: ${it.status}")
@@ -56,24 +63,22 @@ class BithumbRepository(
                             result.add(ticker)
                         }
                     }
+//                    bithumbDao.insertAll(result)
                     bithumbDao.insertAll(result)
                 }
         }
     }
 
-    override suspend fun getAllTickers(): Flow<Ticker> = flow {
+    suspend fun getAllTickers(): Flow<Ticker> = flow {
         //네트워크 연결 가능한 경우
         if (isNetworkAvailable()) {
-            bithumbApiService.getTickers()
+            bithumbTickerApiService.getTickers()
                 .also {
                     if (it.status != "0000") {
                         Log.d("TAG", "status: ${it.status}")
                     }
                 }
                 .data.run {
-                    val moshi = Moshi.Builder()
-                        .add(KotlinJsonAdapterFactory())
-                        .build()
                     val adapter = moshi.adapter(BithumbTicker::class.java)
                     val date = (get("date") as String).toLong()
                     map {
@@ -91,9 +96,7 @@ class BithumbRepository(
                         }
                     }
                 }
-
         }
-
     }.flowOn(Dispatchers.IO)
 
 }

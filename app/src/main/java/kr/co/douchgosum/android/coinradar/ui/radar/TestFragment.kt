@@ -1,4 +1,4 @@
-package kr.co.douchgosum.android.coinradar.ui.main3
+package kr.co.douchgosum.android.coinradar.ui.radar
 
 import android.os.Bundle
 import android.view.LayoutInflater

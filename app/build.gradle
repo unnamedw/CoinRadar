@@ -98,11 +98,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:17.6.0'
     implementation 'com.google.firebase:firebase-config-ktx:19.2.0'
     implementation 'com.google.firebase:firebase-core:17.5.1'
-    implementation 'com.google.firebase:firebase-ads:19.4.0'
+    implementation 'com.google.firebase:firebase-ads:19.5.0'
 
     //Gms & AdMob
     implementation 'com.google.gms:google-services:4.3.4'
-    implementation 'com.google.android.gms:play-services-ads:19.4.0'
+    implementation 'com.google.android.gms:play-services-ads:19.5.0'
 
     // Koin
     implementation "org.koin:koin-androidx-scope:$koin_version"

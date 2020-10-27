@@ -1,4 +1,4 @@
-package kr.co.douchgosum.android.coinradar.ui.main5
+package kr.co.douchgosum.android.coinradar.ui.community
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import kr.co.douchgosum.android.coinradar.R
 import kr.co.douchgosum.android.coinradar.ui.BaseFragment
 
-class SettingFragment : BaseFragment() {
+class CommunityFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +17,7 @@ class SettingFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_setting, container, false)
+        val view = inflater.inflate(R.layout.fragment_community, container, false)
         return view
     }
 

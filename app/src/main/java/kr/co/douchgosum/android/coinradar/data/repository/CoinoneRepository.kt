@@ -7,19 +7,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kr.co.douchgosum.android.coinradar.data.Exchange
 import kr.co.douchgosum.android.coinradar.data.Ticker
-import kr.co.douchgosum.android.coinradar.data.api.CoinoneApiService
-import kr.co.douchgosum.android.coinradar.data.entity.CoinoneTicker
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.CoinoneTickerApiService
+import kr.co.douchgosum.android.coinradar.data.remote.entity.CoinoneTicker
 
 class CoinoneRepository(
     context: Context,
-    private val coinoneApiService: CoinoneApiService
+    private val coinoneTickerApiService: CoinoneTickerApiService
 ): Repository(context) {
 
-    override suspend fun getAllTickers(): Flow<Ticker> = flow {
+    suspend fun getAllTickers(): Flow<Ticker> = flow {
         if (isNetworkAvailable()) {
-            coinoneApiService.getTickers()
+            coinoneTickerApiService.getTickers()
                 .run {
                     val moshi = Moshi.Builder()
                         .add(KotlinJsonAdapterFactory())
@@ -41,7 +40,7 @@ class CoinoneRepository(
                                 quoteCurrency = "krw",
                                 openPrice = coinoneTicker.first,
                                 closePrice = coinoneTicker.last,
-                                timeStamp = timestamp * 1000
+                                timeStamp = timestamp * 1000 // 코인원은 타임스탬프가 초(s) 단위로 표시되므로 1000을 곱하여 밀리 초(ms) 단위로 변경
                             )
                         emit(ticker)
                     }

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 import kr.co.douchgosum.android.coinradar.data.Ticker
 import kr.co.douchgosum.android.coinradar.data.api.UpbitApi
-import kr.co.douchgosum.android.coinradar.data.entity.UpbitMarket
+import kr.co.douchgosum.android.coinradar.data.remote.entity.UpbitMarket
 import org.json.JSONArray
 import org.junit.Test
 

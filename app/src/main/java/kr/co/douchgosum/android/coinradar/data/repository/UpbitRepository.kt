@@ -3,23 +3,22 @@ package kr.co.douchgosum.android.coinradar.data.repository
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kr.co.douchgosum.android.coinradar.data.Exchange
 import kr.co.douchgosum.android.coinradar.data.Ticker
-import kr.co.douchgosum.android.coinradar.data.api.UpbitApiService
-import kr.co.douchgosum.android.coinradar.data.entity.UpbitMarket
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.UpbitTickerApiService
+import kr.co.douchgosum.android.coinradar.data.remote.entity.UpbitMarket
 
 class UpbitRepository(
     context: Context,
-    private val upbitApiService: UpbitApiService
+    private val upbitTickerApiService: UpbitTickerApiService
 ) : Repository(context) {
 
-    override suspend fun getAllTickers(): Flow<Ticker> = flow {
+    suspend fun getAllTickers(): Flow<Ticker> = flow {
         if (isNetworkAvailable()) {
             val marketList = getAllMarkets()
                 .map {
                     it.market
                 }.toList()
-            upbitApiService.getTickers(markets = marketList)
+            upbitTickerApiService.getTickers(markets = marketList)
                 .map { upbitTicker ->
                     val marketSymbol = upbitTicker.market.split("-")
                     val ticker =
@@ -36,7 +35,7 @@ class UpbitRepository(
     }
 
     suspend fun getAllMarkets(): Flow<UpbitMarket> = flow {
-        upbitApiService.getAllMarkets()
+        upbitTickerApiService.getAllMarkets()
             .map {upbitMarket ->
                 emit(upbitMarket)
             }

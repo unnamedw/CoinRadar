@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main4.NotificationFragment">
+    tools:context=".ui.notification.NotificationFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_notification"
@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
-            android:text="@string/main2_title" />
+            android:text="@string/bottom_menu_notification_title" />
     </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>
