@@ -9,10 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kr.co.douchgosum.android.coinradar.data.Ticker
 import kr.co.douchgosum.android.coinradar.data.remote.ticker.BithumbTickerApiService
 import kr.co.douchgosum.android.coinradar.data.db.TickerDao
-import kr.co.douchgosum.android.coinradar.data.remote.entity.BithumbTicker
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.BithumbTicker
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
 import org.koin.java.KoinJavaComponent.get
 
 /**

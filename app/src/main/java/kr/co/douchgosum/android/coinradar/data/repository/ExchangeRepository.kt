@@ -1,23 +1,30 @@
 package kr.co.douchgosum.android.coinradar.data.repository
 
 import android.content.Context
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import androidx.lifecycle.LiveData
+import kr.co.douchgosum.android.coinradar.data.db.ExchangeDao
 import kr.co.douchgosum.android.coinradar.data.remote.exchange.CoinGeckoExchangeService
-import kr.co.douchgosum.android.coinradar.data.remote.entity.CoinGeckoExchange
+import kr.co.douchgosum.android.coinradar.data.remote.exchange.CoinGeckoExchange
 
 class ExchangeRepository(
     context: Context,
+    private val exchangeDao: ExchangeDao,
     private val coinGeckoExchangeService: CoinGeckoExchangeService
 ): Repository(context) {
 
-    suspend fun getAllExchanges(): Flow<CoinGeckoExchange> = flow {
-        coinGeckoExchangeService.getAllExchanges()
-            .forEach { coinGeckoExchange ->
-                emit(coinGeckoExchange)
-            }
-    }.flowOn(Dispatchers.IO)
+    fun getAllExchanges(): LiveData<List<CoinGeckoExchange>> = exchangeDao.getAllExchanges()
+
+    suspend fun update() {
+        exchangeDao.insertExchanges(
+            coinGeckoExchangeService.getAllExchanges()
+        )
+    }
+
+//    suspend fun updateExchanges(): Flow<CoinGeckoExchange> = flow {
+//        coinGeckoExchangeService.getAllExchanges()
+//            .forEach { coinGeckoExchange ->
+//                emit(coinGeckoExchange)
+//            }
+//    }.flowOn(Dispatchers.IO)
 
 }

@@ -13,8 +13,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import kr.co.douchgosum.android.coinradar.di.apiModule
-import kr.co.douchgosum.android.coinradar.di.appModule
-import kr.co.douchgosum.android.coinradar.di.dataModule
+import kr.co.douchgosum.android.coinradar.di.dbModule
 import kr.co.douchgosum.android.coinradar.di.uiModule
 import kr.co.douchgosum.android.coinradar.utils.ConnectionStateMonitor
 import org.koin.android.ext.koin.androidContext
@@ -30,9 +29,8 @@ class AppApplication: Application() {
         startKoin {
             androidContext(applicationContext)
             modules(listOf(
-                appModule,
                 apiModule,
-                dataModule,
+                dbModule,
                 uiModule
             ))
         }

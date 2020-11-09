@@ -7,9 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kr.co.douchgosum.android.coinradar.data.Ticker
 import kr.co.douchgosum.android.coinradar.data.remote.ticker.CoinoneTickerApiService
-import kr.co.douchgosum.android.coinradar.data.remote.entity.CoinoneTicker
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.CoinoneTicker
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
 
 class CoinoneRepository(
     context: Context,

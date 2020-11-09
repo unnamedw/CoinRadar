@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.BindingConversion
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -63,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         //전면광고 표시
 //        showAd(R.string.admob_interstitialad_id)
     }
-
 
     /**
      * Fragment 의 백스택이 남아있지 않은 경우에만 앱 종료

@@ -33,7 +33,7 @@ val apiModule = module {
             .connectTimeout(3000, TimeUnit.SECONDS)
             .readTimeout(3000, TimeUnit.SECONDS)
             .writeTimeout(3000, TimeUnit.SECONDS)
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
+//            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
 //            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }

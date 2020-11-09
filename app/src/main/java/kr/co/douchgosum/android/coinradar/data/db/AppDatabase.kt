@@ -5,14 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import kr.co.douchgosum.android.coinradar.data.Ticker
+import kr.co.douchgosum.android.coinradar.data.remote.exchange.CoinGeckoExchange
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
 
-@Database(entities = [Ticker::class], version = 1, exportSchema = false)
+@Database(entities = [Ticker::class, CoinGeckoExchange::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun tickerDao(): TickerDao
+    abstract fun exchangeDao(): ExchangeDao
 
     private class AppDatabaseCallback: RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {

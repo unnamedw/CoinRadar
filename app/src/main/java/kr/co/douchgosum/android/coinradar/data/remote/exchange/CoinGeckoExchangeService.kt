@@ -1,6 +1,5 @@
 package kr.co.douchgosum.android.coinradar.data.remote.exchange
 
-import kr.co.douchgosum.android.coinradar.data.remote.entity.CoinGeckoExchange
 import retrofit2.http.GET
 import retrofit2.http.Query
 

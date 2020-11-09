@@ -2,7 +2,7 @@ package kr.co.douchgosum.android.coinradar.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import kr.co.douchgosum.android.coinradar.data.Ticker
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
 
 @Dao
 interface TickerDao {

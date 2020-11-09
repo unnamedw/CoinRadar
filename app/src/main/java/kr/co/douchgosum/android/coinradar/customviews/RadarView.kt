@@ -1,4 +1,4 @@
-package kr.co.douchgosum.android.coinradar.views
+package kr.co.douchgosum.android.coinradar.customviews
 
 import android.content.Context
 import android.graphics.Canvas

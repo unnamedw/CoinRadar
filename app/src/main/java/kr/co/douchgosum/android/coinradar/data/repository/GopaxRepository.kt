@@ -5,10 +5,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kr.co.douchgosum.android.coinradar.data.Exchange
-import kr.co.douchgosum.android.coinradar.data.Ticker
 import kr.co.douchgosum.android.coinradar.data.remote.ticker.GopaxTickerApiService
-import kr.co.douchgosum.android.coinradar.utils.dateToMillis
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
+import java.text.SimpleDateFormat
+import java.util.*
 
 class GopaxRepository(
     context: Context,
@@ -20,7 +20,7 @@ class GopaxRepository(
             gopaxTickerApiService.getTickers()
                 .map {
                     val currency = it.name.split('-')
-                    val timeStamp = dateToMillis(it.time, Exchange.GOPAX)
+                    val timeStamp = dateToMillis(it.time)
                     val ticker =
                         Ticker(
                             baseCurrency = currency[0],
@@ -36,5 +36,20 @@ class GopaxRepository(
         }
     }.flowOn(Dispatchers.IO)
 
+
+    private fun dateToMillis(utc: String): Long {
+        val utcStr = utc.toLowerCase(Locale.ROOT)
+            .replace("t", " ")
+            .replace("z", "")
+        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.KOREA)
+            .apply {
+                timeZone = TimeZone.getTimeZone("UTC")
+            }
+        val date = format.parse(utcStr)
+
+        return date?.time ?: -1
+    }
 }
+
+
 

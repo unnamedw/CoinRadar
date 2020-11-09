@@ -3,9 +3,9 @@ package kr.co.douchgosum.android.coinradar.data.repository
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kr.co.douchgosum.android.coinradar.data.Ticker
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
 import kr.co.douchgosum.android.coinradar.data.remote.ticker.UpbitTickerApiService
-import kr.co.douchgosum.android.coinradar.data.remote.entity.UpbitMarket
+import kr.co.douchgosum.android.coinradar.data.remote.ticker.UpbitMarket
 
 class UpbitRepository(
     context: Context,
