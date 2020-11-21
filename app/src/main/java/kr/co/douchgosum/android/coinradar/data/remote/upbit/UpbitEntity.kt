@@ -1,6 +1,7 @@
-package kr.co.douchgosum.android.coinradar.data.remote.ticker
+package kr.co.douchgosum.android.coinradar.data.remote.upbit
 
 import com.squareup.moshi.Json
+import kr.co.douchgosum.android.coinradar.data.db.Ticker
 
 data class UpbitTicker(
     val market: String,
@@ -29,7 +30,20 @@ data class UpbitTicker(
     @Json(name = "lowest_52_week_price") val lowest52WeekPrice: Double,
     @Json(name = "lowest_52_week_date") val lowest52Weekdate: String,
     val timestamp: Long
-)
+) {
+
+    fun toTicker(): Ticker {
+        val marketSymbol = market.split("-")
+        return Ticker(
+            baseSymbol = marketSymbol[1],
+            quoteSymbol = marketSymbol[0],
+            currentPrice = tradePrice,
+            timeStamp = timestamp,
+            fluctuatePrice24H = signedChangePrice,
+            fluctuateRate24H = signedChangeRate
+        )
+    }
+}
 
 data class UpbitMarket(
     val market: String,

@@ -1,9 +1,9 @@
-package kr.co.douchgosum.android.coinradar.data.remote.ticker
+package kr.co.douchgosum.android.coinradar.data.remote.bithumb
 
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface BithumbTickerApiService {
+interface BithumbApiService {
 
 /**
  * KRW 만 지원

@@ -1,43 +1,28 @@
 package kr.co.douchgosum.android.coinradar.data.repository
 
 import android.content.Context
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
-import kr.co.douchgosum.android.coinradar.data.remote.ticker.UpbitTickerApiService
-import kr.co.douchgosum.android.coinradar.data.remote.ticker.UpbitMarket
+import kr.co.douchgosum.android.coinradar.data.db.Ticker
+import kr.co.douchgosum.android.coinradar.data.remote.upbit.UpbitApiService
+import kr.co.douchgosum.android.coinradar.data.remote.upbit.UpbitMarket
 
 class UpbitRepository(
     context: Context,
-    private val upbitTickerApiService: UpbitTickerApiService
+    private val upbitApiService: UpbitApiService
 ) : Repository(context) {
 
-    suspend fun getAllTickers(): Flow<Ticker> = flow {
+    suspend fun getAllTickers(): List<Ticker> {
+        var tickerList = emptyList<Ticker>()
         if (isNetworkAvailable()) {
-            val marketList = getAllMarkets()
-                .map {
-                    it.market
-                }.toList()
-            upbitTickerApiService.getTickers(markets = marketList)
-                .map { upbitTicker ->
-                    val marketSymbol = upbitTicker.market.split("-")
-                    val ticker =
-                        Ticker(
-                            baseCurrency = marketSymbol[1],
-                            quoteCurrency = marketSymbol[0],
-                            openPrice = upbitTicker.openingPrice,
-                            closePrice = upbitTicker.tradePrice,
-                            timeStamp = upbitTicker.timestamp
-                        )
-                    emit(ticker)
-                }
+            val marketList = getAllMarkets().map {
+                it.market
+            }.toList()
+            tickerList = upbitApiService.getTickers(marketList).map { upbitTicker ->
+                upbitTicker.toTicker()
+            }
         }
+        return tickerList
     }
 
-    suspend fun getAllMarkets(): Flow<UpbitMarket> = flow {
-        upbitTickerApiService.getAllMarkets()
-            .map {upbitMarket ->
-                emit(upbitMarket)
-            }
-    }.flowOn(Dispatchers.IO)
+    private suspend fun getAllMarkets(): List<UpbitMarket> = upbitApiService.getAllMarkets()
 }

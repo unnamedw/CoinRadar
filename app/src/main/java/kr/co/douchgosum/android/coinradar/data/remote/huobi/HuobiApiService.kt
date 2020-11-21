@@ -1,8 +1,8 @@
-package kr.co.douchgosum.android.coinradar.data.remote.ticker
+package kr.co.douchgosum.android.coinradar.data.remote.huobi
 
 import retrofit2.http.GET
 
-interface HuobiTickerApiService {
+interface HuobiApiService {
 
 /**
  * KRW, ETH, BTC, HC(Huobi Coin) 지원

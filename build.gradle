@@ -11,6 +11,7 @@ buildscript {
         koin_version = '2.1.5'
         room_version = "2.2.5"
         viewPagerVersion = '1.0.0'
+        glide_version = '4.11.0'
     }
     repositories {
         google()

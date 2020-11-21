@@ -5,6 +5,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import kotlinx.coroutines.flow.Flow
+import kr.co.douchgosum.android.coinradar.data.db.Ticker
+import java.util.*
 
 abstract class Repository(
     private val context: Context
@@ -43,7 +45,6 @@ abstract class Repository(
                 }
             }
         }
-
         return result
     }
 

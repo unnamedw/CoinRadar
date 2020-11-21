@@ -5,50 +5,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kr.co.douchgosum.android.coinradar.data.remote.ticker.GopaxTickerApiService
-import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
-import java.text.SimpleDateFormat
-import java.util.*
+import kr.co.douchgosum.android.coinradar.data.remote.gopax.GopaxApiService
+import kr.co.douchgosum.android.coinradar.data.db.Ticker
 
 class GopaxRepository(
     context: Context,
-    private val gopaxTickerApiService: GopaxTickerApiService
+    private val gopaxApiService: GopaxApiService
 ): Repository(context) {
 
-    suspend fun getAllTickers(): Flow<Ticker> = flow {
+    suspend fun getAllTickers(): List<Ticker> {
+        var tickerList = emptyList<Ticker>()
         if (isNetworkAvailable()) {
-            gopaxTickerApiService.getTickers()
-                .map {
-                    val currency = it.name.split('-')
-                    val timeStamp = dateToMillis(it.time)
-                    val ticker =
-                        Ticker(
-                            baseCurrency = currency[0],
-                            quoteCurrency = currency[1],
-                            openPrice = it.open,
-                            closePrice = it.close,
-                            timeStamp = timeStamp
-                        )
-                    emit(ticker)
-                }
-        } else {
-
-        }
-    }.flowOn(Dispatchers.IO)
-
-
-    private fun dateToMillis(utc: String): Long {
-        val utcStr = utc.toLowerCase(Locale.ROOT)
-            .replace("t", " ")
-            .replace("z", "")
-        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.KOREA)
-            .apply {
-                timeZone = TimeZone.getTimeZone("UTC")
+             tickerList = gopaxApiService.getTickers().map { gopaxTicker ->
+                gopaxTicker.toTicker()
             }
-        val date = format.parse(utcStr)
+        }
 
-        return date?.time ?: -1
+        return tickerList
     }
+
+
+
+
 }
 
 

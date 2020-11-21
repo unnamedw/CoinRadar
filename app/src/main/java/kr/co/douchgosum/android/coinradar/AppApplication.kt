@@ -12,9 +12,7 @@ import com.google.android.gms.ads.MobileAds
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
-import kr.co.douchgosum.android.coinradar.di.apiModule
-import kr.co.douchgosum.android.coinradar.di.dbModule
-import kr.co.douchgosum.android.coinradar.di.uiModule
+import kr.co.douchgosum.android.coinradar.di.*
 import kr.co.douchgosum.android.coinradar.utils.ConnectionStateMonitor
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -22,24 +20,43 @@ import org.koin.core.context.startKoin
 class AppApplication: Application() {
     override fun onCreate() {
         super.onCreate()
-        //AdMob Init
+
+        //AdMob init
         MobileAds.initialize(this)
 
-        //DI Init
+        //Firebase Config init
+//        initRemoteConfig()
+
+        //Koin init
         startKoin {
             androidContext(applicationContext)
             modules(listOf(
-                apiModule,
                 dbModule,
-                uiModule
+                retrofitModule,
+                apiModule,
+                viewModelModule
             ))
         }
-
-        //Network state monitoring
-        val monitor = ConnectionStateMonitor(this).apply { enable() }
-
     }
 
-
+    private fun initRemoteConfig() {
+        val remoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 3600
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
+        remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val updated = task.result
+                Log.d("MyTag", "Config params updated: $updated")
+                Log.d("MyTag", "fetch succeed")
+                val string = remoteConfig.getString("lottery_data")
+                Log.d("MyTag", "총 글자수: ${string.length}")
+            } else {
+                Log.d("MyTag", "fetch failed")
+            }
+        }
+    }
 
 }

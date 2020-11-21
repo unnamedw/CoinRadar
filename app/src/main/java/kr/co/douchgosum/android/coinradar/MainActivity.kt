@@ -96,28 +96,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Remote config 초기화
-     * */
-    private fun initRemoteConfig() {
-        val remoteConfig = Firebase.remoteConfig
-        val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 3600
-        }
-        remoteConfig.setConfigSettingsAsync(configSettings)
-        remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
-        remoteConfig.fetchAndActivate().addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                val updated = task.result
-                Log.d("MyTag", "Config params updated: $updated")
-                Log.d("MyTag", "fetch succeed")
-                val string = remoteConfig.getString("lottery_data")
-                Log.d("MyTag", "총 글자수: ${string.length}")
-            } else {
-                Log.d("MyTag", "fetch failed")
-            }
-        }
-    }
+
 
     fun showBottomSheet() {
         val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this@MainActivity)

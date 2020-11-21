@@ -1,9 +1,9 @@
-package kr.co.douchgosum.android.coinradar.data.remote.ticker
+package kr.co.douchgosum.android.coinradar.data.remote.upbit
 
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface UpbitTickerApiService {
+interface UpbitApiService {
 
     @GET("ticker")
     suspend fun getTickers(

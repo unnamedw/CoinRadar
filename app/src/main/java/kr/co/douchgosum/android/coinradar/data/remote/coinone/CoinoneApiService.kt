@@ -1,9 +1,9 @@
-package kr.co.douchgosum.android.coinradar.data.remote.ticker
+package kr.co.douchgosum.android.coinradar.data.remote.coinone
 
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface CoinoneTickerApiService {
+interface CoinoneApiService {
 
 
 /**

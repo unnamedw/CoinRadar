@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/background_light"
             app:menu="@menu/bottom_navigation_menu"
-            app:labelVisibilityMode="labeled">
+            app:labelVisibilityMode="auto">
 
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>

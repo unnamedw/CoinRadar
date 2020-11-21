@@ -1,6 +1,7 @@
-package kr.co.douchgosum.android.coinradar.data.remote.ticker
+package kr.co.douchgosum.android.coinradar.data.remote.bithumb
 
 import com.squareup.moshi.Json
+import kr.co.douchgosum.android.coinradar.data.db.Ticker
 
 data class BithumbTickerResponse(
     val status: String,
@@ -19,4 +20,17 @@ data class BithumbTicker(
     @Json(name = "acc_trade_value_24H") val accTradeValue24H: String,
     @Json(name = "fluctate_24H") val fluctate24H: String,
     @Json(name = "fluctate_rate_24H") val fluctateRate24H: String
-)
+) {
+
+    fun toTicker(base: String, time: Long): Ticker {
+        return Ticker(
+            baseSymbol = base,
+            quoteSymbol = "krw",
+            currentPrice = closingPrice.toDouble(),
+            timeStamp = time,
+            fluctuatePrice24H = fluctate24H.toDouble(),
+            fluctuateRate24H = fluctateRate24H.toDouble()
+        )
+    }
+
+}

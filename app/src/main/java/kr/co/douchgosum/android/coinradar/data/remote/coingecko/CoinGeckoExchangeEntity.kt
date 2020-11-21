@@ -1,4 +1,4 @@
-package kr.co.douchgosum.android.coinradar.data.remote.exchange
+package kr.co.douchgosum.android.coinradar.data.remote.coingecko
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -2,14 +2,12 @@ package kr.co.douchgosum.android.coinradar.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
 
 @Dao
 interface TickerDao {
 
-
-    @Query("SELECT * from tickers")
-    fun getAllTickers(): LiveData<List<Ticker>>
+    @Query("SELECT * from tickers ORDER BY current_price DESC")
+    fun getAllTickers(): List<Ticker>
 
     @Query("DELETE FROM tickers")
     suspend fun deleteAll()

@@ -8,12 +8,15 @@
     //Ticker 아이템 사이즈
     <dimen name="ticker_item_height">50dp</dimen>
 
-    <dimen name="ticker_base_text_size">10sp</dimen>
-    <dimen name="ticker_price_text_size">10sp</dimen>
-    <dimen name="ticker_rate_text_size">10sp</dimen>
+    //Ticker 아이템 텍스트 사이즈
+    <dimen name="ticker_default_text_size">11sp</dimen>
+    <dimen name="ticker_base_text_size">14sp</dimen>
+    <dimen name="ticker_price_text_size">14sp</dimen>
+    <dimen name="ticker_fluc_price_text_size">12sp</dimen>
+    <dimen name="ticker_fluc_rate_text_size">13sp</dimen>
 
-    <dimen name="ticker_base_width_percent">0.2</dimen>
-    <dimen name="ticker_price_width_percent">0.3</dimen>
-    <dimen name="ticker_ratio_width_percent">0.2</dimen>
+    <dimen name="ticker_holder_text_size">12sp</dimen>
+
+    <dimen name="ticker_top_search_size">16sp</dimen>
 
 </resources>

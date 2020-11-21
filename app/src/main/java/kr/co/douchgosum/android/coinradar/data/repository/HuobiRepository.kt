@@ -1,47 +1,26 @@
 package kr.co.douchgosum.android.coinradar.data.repository
 
 import android.content.Context
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kr.co.douchgosum.android.coinradar.data.remote.ticker.HuobiTickerApiService
-import kr.co.douchgosum.android.coinradar.data.remote.ticker.Ticker
+import kr.co.douchgosum.android.coinradar.data.remote.huobi.HuobiApiService
+import kr.co.douchgosum.android.coinradar.data.db.Ticker
 
 class HuobiRepository (
     context: Context,
-    private val huobiTickerApiService: HuobiTickerApiService
+    private val huobiApiService: HuobiApiService
 ): Repository(context) {
 
-    suspend fun getAllTickers(): Flow<Ticker> = flow {
+    suspend fun getAllTickers(): List<Ticker> {
+        var tickerList = emptyList<Ticker>()
         if (isNetworkAvailable()) {
-            huobiTickerApiService.getTickers()
-                .run {
-                    val timestamp = ts
-                    data.map { huobiTicker ->
-                        val dividedSymbol = divideHuobiSymbol(huobiTicker.symbol)
-                        val ticker =
-                            Ticker(
-                                baseCurrency = dividedSymbol[0],
-                                quoteCurrency = dividedSymbol[1],
-                                openPrice = huobiTicker.open,
-                                closePrice = huobiTicker.close,
-                                timeStamp = timestamp
-                            )
-                        emit(ticker)
-                    }
+            huobiApiService.getTickers().run {
+                val timestamp = ts
+                tickerList = data.map { huobiTicker ->
+                    huobiTicker.toTicker(timestamp)
                 }
-        }
-    }.flowOn(Dispatchers.IO)
-
-    private fun divideHuobiSymbol(symbol: String): List<String> {
-        val suffixes = listOf("btc", "krw", "eth", "ht", "usdt")
-        suffixes.forEach { suffix ->
-            if (symbol.endsWith(suffix, ignoreCase = true)) {
-                return listOf(symbol.replace(suffix, "", ignoreCase = true), suffix)
             }
         }
-        return emptyList()
+        return tickerList
     }
+
 
 }
