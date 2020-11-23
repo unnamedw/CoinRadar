@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light">
+
+        <Spinner
+            android:id="@+id/spin_exchange"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:hint="거래소"
+            android:textSize="@dimen/ticker_default_text_size"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintDimensionRatio="5:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/spin_currency"/>
+        <Spinner
+            android:id="@+id/spin_currency"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:hint="통화"
+            android:textSize="@dimen/ticker_default_text_size"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintStart_toEndOf="@id/spin_exchange"
+            app:layout_constraintTop_toTopOf="@id/spin_exchange"
+            app:layout_constraintBottom_toBottomOf="@id/spin_exchange"/>
+        <ImageView
+            android:id="@+id/iv_favorite"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_baseline_star_border_24"
+            android:padding="3dp"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintTop_toTopOf="@id/spin_exchange"
+            app:layout_constraintStart_toEndOf="@id/spin_currency"
+            app:layout_constraintBottom_toBottomOf="@id/spin_exchange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/colorAccent" />
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:hint="@string/ticker_top_search_hint"
+            android:background="@android:color/transparent"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="@dimen/ticker_default_text_size"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintDimensionRatio="7:1"
+            app:layout_constraintTop_toBottomOf="@id/spin_currency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
