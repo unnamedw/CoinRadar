@@ -35,6 +35,19 @@
 
         </androidx.fragment.app.FragmentContainerView>
 
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_news_headlines"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:background="@color/colorAccent">-->
+
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="@string/news_headline"-->
+<!--                android:gravity="center"/>-->
+<!--        </LinearLayout>-->
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
@@ -42,9 +55,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/background_light"
             app:menu="@menu/bottom_navigation_menu"
-            app:labelVisibilityMode="auto">
-
-
+            app:labelVisibilityMode="unlabeled">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </LinearLayout>

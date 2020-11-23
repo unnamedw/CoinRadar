@@ -46,4 +46,7 @@
 <!--        <item>Upbit(added later)</item>-->
     </string-array>
 
+    //뉴스 헤드라인
+    <string name="news_headline">This is News Headline</string>
+
 </resources>
