@@ -7,11 +7,18 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kr.co.douchgosum.android.coinradar.data.remote.coingecko.CoinGeckoExchange
 
-@Database(entities = [Ticker::class, CoinGeckoExchange::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Ticker::class,
+        CoinGeckoExchange::class,
+        CurrencySymbol::class,
+        TickerThumbnailDao::class],
+    version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun tickerDao(): TickerDao
     abstract fun exchangeDao(): ExchangeDao
+    abstract fun currencySymbolDao(): CurrencySymbolDao
+    abstract fun tickerThumnailDao(): TickerThumbnailDao
 
     private class AppDatabaseCallback: RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {

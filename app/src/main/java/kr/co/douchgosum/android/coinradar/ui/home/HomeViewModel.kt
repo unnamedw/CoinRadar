@@ -3,11 +3,13 @@ package kr.co.douchgosum.android.coinradar.ui.home
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import kr.co.douchgosum.android.coinradar.data.db.Ticker
+import kr.co.douchgosum.android.coinradar.data.repository.BithumbRepository
 import kr.co.douchgosum.android.coinradar.data.repository.CoinGeckoRepository
+import kr.co.douchgosum.android.coinradar.data.repository.Repository
 import java.lang.Exception
 
 class HomeViewModel(
-    private val repository: CoinGeckoRepository
+    private val repository: BithumbRepository
 ): ViewModel(), LifecycleEventObserver {
 
     private var isUpdating = false
@@ -20,7 +22,8 @@ class HomeViewModel(
         isUpdating = true
         while (isUpdating) {
             try {
-                _tickers.value = repository.getAllTickers("").toList()
+                _tickers.value = repository.getAllTickers()
+//                _tickers.value = repository.getAllTickers("").toList()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -44,7 +47,7 @@ class HomeViewModel(
     }
 
     class HomeViewModelFactory(
-        private val repository: CoinGeckoRepository
+        private val repository: BithumbRepository
     ): ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return HomeViewModel(repository) as T

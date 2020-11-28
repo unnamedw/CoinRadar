@@ -5,9 +5,8 @@ import kr.co.douchgosum.android.coinradar.data.remote.huobi.HuobiApiService
 import kr.co.douchgosum.android.coinradar.data.db.Ticker
 
 class HuobiRepository (
-    context: Context,
     private val huobiApiService: HuobiApiService
-): Repository(context) {
+): Repository() {
 
     suspend fun getAllTickers(): List<Ticker> {
         var tickerList = emptyList<Ticker>()

@@ -10,9 +10,9 @@
     //bottom navigation main titles
     <string name="bottom_menu_home_title">Home</string>
     <string name="bottom_menu_notification_title">Notification</string>
-    <string name="bottom_menu_item3_title"> </string>
+    <string name="bottom_menu_item3_title">Radar</string>
     <string name="bottom_menu_community_title">Community</string>
-    <string name="bottom_menu_info_title">Info</string>
+    <string name="bottom_menu_setting_title">Setting</string>
 
     //home fragment tabs titles
     <string name="fragment_home_tab1_title">Coin</string>
@@ -37,14 +37,45 @@
 
 
     //거래소 종류
-    <string-array name="exchange_name">
-        <item>No Filter</item>
-<!--        <item>Bithumb(added later)</item>-->
-<!--        <item>Coinone(added later)</item>-->
-<!--        <item>Gopax(added later)</item>-->
-<!--        <item>Huobi(added later)</item>-->
-<!--        <item>Upbit(added later)</item>-->
+    <string-array name="exchanges_array">
+        <item>Bithumb</item>
+        <item>Coinone</item>
+        <item>Gopax</item>
+        <item>Huobi</item>
+        <item>Upbit</item>
     </string-array>
+
+    //통화 종류
+    <string-array name="bithumb_currencies_array">
+        <item>krw</item>
+    </string-array>
+
+    <string-array name="coingecko_currencies_array">
+        <item>krw</item>
+    </string-array>
+
+    <string-array name="coinone_currencies_array">
+        <item>krw</item>
+    </string-array>
+
+    <string-array name="gopax_currencies_array">
+        <item>krw</item>
+        <item>btc</item>
+    </string-array>
+
+    <string-array name="huobi_currencies_array">
+        <item>krw</item>
+        <item>eth</item>
+        <item>btc</item>
+        <item>hc</item>
+    </string-array>
+
+    <string-array name="upbit_currencies_array">
+        <item>krw</item>
+        <item>btc</item>
+    </string-array>
+
+
 
     //뉴스 헤드라인
     <string name="news_headline">This is News Headline</string>

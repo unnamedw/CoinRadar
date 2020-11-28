@@ -23,14 +23,15 @@ data class BithumbTicker(
 ) {
 
     fun toTicker(base: String, time: Long): Ticker {
-        return Ticker(
-            baseSymbol = base,
-            quoteSymbol = "krw",
-            currentPrice = closingPrice.toDouble(),
-            timeStamp = time,
-            fluctuatePrice24H = fluctate24H.toDouble(),
+        return Ticker.Builder().apply {
+            baseSymbol = base
+            quoteSymbol = "krw"
+            currentPrice = closingPrice.toDouble()
+            timeStamp = time
+            fluctuatePrice24H = fluctate24H.toDouble()
             fluctuateRate24H = fluctateRate24H.toDouble()
-        )
+            exchange = "bithumb"
+        }.build()
     }
 
 }

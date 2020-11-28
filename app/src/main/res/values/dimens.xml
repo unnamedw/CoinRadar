@@ -10,7 +10,8 @@
 
     //Ticker 아이템 텍스트 사이즈
     <dimen name="ticker_default_text_size">11sp</dimen>
-    <dimen name="ticker_base_text_size">14sp</dimen>
+    <dimen name="ticker_name_text_size">14sp</dimen>
+    <dimen name="ticker_symbol_text_size">13sp</dimen>
     <dimen name="ticker_price_text_size">14sp</dimen>
     <dimen name="ticker_fluc_price_text_size">12sp</dimen>
     <dimen name="ticker_fluc_rate_text_size">13sp</dimen>

@@ -12,17 +12,13 @@ import kr.co.douchgosum.android.coinradar.MainActivity
 import kr.co.douchgosum.android.coinradar.R
 
 abstract class BaseFragment: Fragment() {
-    lateinit var parentActivity: MainActivity
+    private lateinit var parentActivity: MainActivity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         parentActivity = activity as MainActivity
         initToolBar(view)
         Log.d("MyTag", this.javaClass.simpleName)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
     private fun initToolBar(view: View) {
@@ -36,8 +32,7 @@ abstract class BaseFragment: Fragment() {
             else -> return
         }
         val toolbar = view.findViewById<Toolbar>(toolbarId)
-        toolbar
-            .setupWithNavController(navController, appBarConfiguration)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     fun setBottomNavigationVisibility(visibilityMode: Int) {

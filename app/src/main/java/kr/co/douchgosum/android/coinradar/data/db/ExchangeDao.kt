@@ -11,9 +11,9 @@ import kr.co.douchgosum.android.coinradar.data.remote.coingecko.CoinGeckoExchang
 interface ExchangeDao {
 
     @Query("SELECT * FROM coingecko_exchanges")
-    fun getAllExchanges(): LiveData<List<CoinGeckoExchange>>
+    fun getAll(): LiveData<List<CoinGeckoExchange>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertExchanges(exchanges: List<CoinGeckoExchange>)
+    suspend fun insert(exchanges: List<CoinGeckoExchange>)
 
 }

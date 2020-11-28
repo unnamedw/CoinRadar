@@ -5,6 +5,10 @@ import retrofit2.http.Query
 
 interface UpbitApiService {
 
+    /**
+     * KRW, USDT, BTC 지원
+     * */
+
     @GET("ticker")
     suspend fun getTickers(
         @Query("markets") markets: List<String>

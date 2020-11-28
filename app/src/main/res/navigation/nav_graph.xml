@@ -3,32 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/bottom_menu_item1">
+    app:startDestination="@id/bottom_menu_home">
     <fragment
-        android:id="@+id/bottom_menu_item1"
+        android:id="@+id/bottom_menu_home"
         android:name="kr.co.douchgosum.android.coinradar.ui.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
     <fragment
-        android:id="@+id/bottom_menu_item2"
+        android:id="@+id/bottom_menu_notification"
         android:name="kr.co.douchgosum.android.coinradar.ui.notification.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification"/>
     <fragment
-        android:id="@+id/bottom_menu_item3"
-        android:name="kr.co.douchgosum.android.coinradar.ui.radar.TestFragment"
-        android:label="TestFragment"
-        tools:layout="@layout/fragment_test" />
+        android:id="@+id/bottom_menu_radar"
+        android:name="kr.co.douchgosum.android.coinradar.ui.radar.RadarFragment"
+        android:label="RadarFragment"
+        tools:layout="@layout/fragment_radar" />
     <fragment
-        android:id="@+id/bottom_menu_item4"
+        android:id="@+id/bottom_menu_community"
         android:name="kr.co.douchgosum.android.coinradar.ui.community.CommunityFragment"
         android:label="CommunityFragment"
         tools:layout="@layout/fragment_community" />
     <fragment
-        android:id="@+id/bottom_menu_item5"
-        android:name="kr.co.douchgosum.android.coinradar.ui.info.InfoFragment"
+        android:id="@+id/bottom_menu_setting"
+        android:name="kr.co.douchgosum.android.coinradar.ui.setting.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_info" />
+        tools:layout="@layout/fragment_setting" />
 
 
 </navigation>

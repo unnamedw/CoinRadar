@@ -34,14 +34,15 @@ data class UpbitTicker(
 
     fun toTicker(): Ticker {
         val marketSymbol = market.split("-")
-        return Ticker(
-            baseSymbol = marketSymbol[1],
-            quoteSymbol = marketSymbol[0],
-            currentPrice = tradePrice,
-            timeStamp = timestamp,
-            fluctuatePrice24H = signedChangePrice,
-            fluctuateRate24H = signedChangeRate
-        )
+        return Ticker.Builder().apply {
+            this.baseSymbol = marketSymbol[1]
+            this.quoteSymbol = marketSymbol[0]
+            this.currentPrice = tradePrice
+            this.timeStamp = timestamp
+            this.fluctuatePrice24H = signedChangePrice
+            this.fluctuateRate24H = signedChangeRate
+            this.exchange = "upbit"
+        }.build()
     }
 }
 

@@ -3,7 +3,7 @@ package kr.co.douchgosum.android.coinradar.data.remote.coinone
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface CoinoneApiService {
+interface CoinoneApiService{
 
 
 /**

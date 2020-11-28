@@ -6,9 +6,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Spinner
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
@@ -16,14 +14,17 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.item_ticker_top.*
 import kotlinx.coroutines.channels.ticker
+import kr.co.douchgosum.android.coinradar.R
 import kr.co.douchgosum.android.coinradar.adapter.TickerListAdapter
+import kr.co.douchgosum.android.coinradar.data.db.Ticker
 import kr.co.douchgosum.android.coinradar.databinding.FragmentTickerBinding
 import kr.co.douchgosum.android.coinradar.ui.BaseFragment
 import kr.co.douchgosum.android.coinradar.utils.RecyclerSectionItemDecoration
+import kr.co.douchgosum.android.coinradar.utils.dateFromTimeMillis
 import org.koin.android.ext.android.inject
 import kotlin.math.log
 
-class TickerFragment : BaseFragment(), TickerListAdapter.OnFavoriteClickListener {
+class TickerFragment : BaseFragment() {
     private val viewModel: TickerViewModel by inject()
     private lateinit var binding: FragmentTickerBinding
     private lateinit var recyclerView: RecyclerView
@@ -45,50 +46,70 @@ class TickerFragment : BaseFragment(), TickerListAdapter.OnFavoriteClickListener
             recyclerView = rvTickerList
             fabToTop = fabNavTop
         }
-
         setUpRecyclerView(recyclerView)
         subscribeUi(rvAdapter)
+        setUpFabButton(fabToTop)
+        return binding.root
+    }
 
-        fabToTop.setOnClickListener {
+    private fun setUpFabButton(fab: FloatingActionButton) {
+        fab.setOnClickListener {
             if (rvAdapter.itemCount>0) {
                 recyclerView.scrollToPosition(0)
             }
         }
-
-        return binding.root
     }
 
     private fun subscribeUi(adapter: TickerListAdapter) {
         viewModel.tickers.observe(viewLifecycleOwner) { tickers ->
             adapter.submitList(tickers)
-            println("데이터 $tickers")
+            tickers.filter {
+                it.baseSymbol.equals("btc", true)
+            }.map {
+                println("비트코인: ${it.currentPrice} / ${dateFromTimeMillis(it.timeStamp)}")
+            }
         }
     }
 
     private fun setUpRecyclerView(rv: RecyclerView) {
-        val sectionItemDecoration = RecyclerSectionItemDecoration(getSectionCallback())
+        val sectionItemDecoration = RecyclerSectionItemDecoration(sectionCallback)
+        rvAdapter.setOnHeaderItemListener(topItemListener)
         rv.adapter = rvAdapter
-        rvAdapter.favoriteClickListener = this
         rv.addItemDecoration(sectionItemDecoration)
-
         // 아이템 갱신 시 깜빡임 방지
         (rv.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
     }
 
-    private fun getSectionCallback(): RecyclerSectionItemDecoration.SectionCallback {
-        return object : RecyclerSectionItemDecoration.SectionCallback {
-            override fun isSection(position: Int): Boolean {
-                return rvAdapter.isHolder(position)
-            }
-
-            override fun getHolderLayoutView(list: RecyclerView, position: Int): View? {
-                return rvAdapter.getHolderViewOrNull(list, position)
-            }
+    private val sectionCallback = object : RecyclerSectionItemDecoration.SectionCallback {
+        override fun isSection(position: Int): Boolean {
+            return rvAdapter.isHolder(position)
+        }
+        override fun getHolderLayoutView(list: RecyclerView, position: Int): View? {
+            return rvAdapter.getHolderViewOrNull(list, position)
         }
     }
 
-    override fun onFavoriteClicked(isFavorite: Boolean) {
-        println("테스트 $isFavorite")
+    private val topItemListener = object : TickerListAdapter.OnTopItemListener {
+        override fun onExchangeChanged(exchange: String) {
+            val sample = if (rvAdapter.itemCount>0) rvAdapter.currentList[0].exchange else null
+            println("거래소: ${sample?.equals(exchange, true)}")
+        }
+
+        override fun onCurrencyChanged(currency: String) {
+
+        }
+
+        override fun onFavoriteClicked(isFavorite: Boolean) {
+
+        }
+
+        override fun onSearchClicked(text: String) {
+
+        }
+
+        override fun onTextChanged(text: String) {
+
+        }
     }
 
 }

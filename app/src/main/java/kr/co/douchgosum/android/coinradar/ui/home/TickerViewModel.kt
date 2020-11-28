@@ -6,16 +6,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kr.co.douchgosum.android.coinradar.data.db.Ticker
-import kr.co.douchgosum.android.coinradar.data.repository.CoinGeckoRepository
+import kr.co.douchgosum.android.coinradar.data.repository.*
 import java.lang.Exception
 
 class TickerViewModel(
-    private val repository: CoinGeckoRepository
+    private val repository: BithumbRepository
 ): ViewModel(), LifecycleEventObserver {
     private var shouldUpdate = false
-
     private val _tickers = MutableLiveData<List<Ticker>>()
-
     val tickers: LiveData<List<Ticker>>
         get() = _tickers
 
@@ -24,7 +22,7 @@ class TickerViewModel(
         withContext(Dispatchers.IO) {
             while (shouldUpdate) {
                 try {
-                    val data = repository.getAllTickers("krw")
+                    val data = repository.getAllTickers()
                     synchronized(_tickers) {
                         _tickers.postValue(data)
                     }
@@ -54,8 +52,10 @@ class TickerViewModel(
         }
     }
 
+
+
     class TickerViewModelFactory(
-        private val repository: CoinGeckoRepository
+        private val repository: BithumbRepository
     ): ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return TickerViewModel(repository) as T

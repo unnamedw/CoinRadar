@@ -6,7 +6,7 @@ import retrofit2.http.Query
 interface CoinGeckoApiService {
 
     @GET("coins/markets")
-    suspend fun getAllTickers(
+    suspend fun getTickers(
         @Query("vs_currency") currency: String = "krw",
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 100

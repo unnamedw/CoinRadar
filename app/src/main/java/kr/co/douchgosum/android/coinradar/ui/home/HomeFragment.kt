@@ -22,7 +22,6 @@ class HomeFragment : BaseFragment() {
     lateinit var tabLayout:TabLayout
     lateinit var viewPager: ViewPager2
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(viewModel)

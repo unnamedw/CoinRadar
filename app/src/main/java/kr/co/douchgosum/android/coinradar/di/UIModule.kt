@@ -1,5 +1,6 @@
 package kr.co.douchgosum.android.coinradar.di
 
+import kr.co.douchgosum.android.coinradar.data.repository.BithumbRepository
 import kr.co.douchgosum.android.coinradar.ui.home.ExchangeListViewModel
 import kr.co.douchgosum.android.coinradar.ui.home.HomeViewModel
 import kr.co.douchgosum.android.coinradar.ui.home.TickerViewModel
@@ -20,7 +21,7 @@ val viewModelModule = module {
     }
 
     viewModel {
-        TickerViewModel(get())
+        TickerViewModel()
     }
 
 }

@@ -6,7 +6,7 @@
 
 <defaultsMap>
     <entry>
-        <key>lottery_data</key>
+        <key>currency_symbols</key>
         <value>No Json Data</value>
     </entry>
 </defaultsMap>

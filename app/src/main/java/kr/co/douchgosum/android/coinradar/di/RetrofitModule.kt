@@ -32,7 +32,7 @@ val retrofitModule = module {
             .build()
     }
 
-    single<OkHttpClient> {
+    single {
         OkHttpClient().newBuilder()
             .connectTimeout(3000, TimeUnit.SECONDS)
             .readTimeout(3000, TimeUnit.SECONDS)
@@ -47,7 +47,6 @@ val apiModule = module {
      * API SERVICE
      *
      * */
-    //Ticker
     single<BithumbApiService> {
         createRetrofitService(BITHUMB_API_URL)
     }
@@ -63,11 +62,10 @@ val apiModule = module {
     single<UpbitApiService> {
         createRetrofitService(UPBIT_API_URL)
     }
-
-    //CoinGecko
     single<CoinGeckoApiService> {
         createRetrofitService(COINGECKO_API_URL)
     }
+
 }
 
 

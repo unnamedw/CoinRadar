@@ -4,12 +4,23 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import kotlinx.coroutines.flow.Flow
-import kr.co.douchgosum.android.coinradar.data.db.Ticker
-import java.util.*
+import com.squareup.moshi.Moshi
+import kr.co.douchgosum.android.coinradar.data.db.CurrencySymbolDao
+import kr.co.douchgosum.android.coinradar.data.db.TickerThumbnailDao
+import kr.co.douchgosum.android.coinradar.data.db.TickerDao
+import org.koin.java.KoinJavaComponent.get
 
+/**
+ * 추상 클래스는 생성자를 통한 의존성 주입이 불가능하여 필드 주입을 하였음.
+ * 필드 주입은 권장되지 않는다고 알고 있는데 향후 수정할 수 있으면 수정.
+ *
+ * */
 abstract class Repository(
-    private val context: Context
+    private val context: Context = get(Context::class.java),
+    val moshi: Moshi = get(Moshi::class.java),
+    val tickerDao: TickerDao = get(TickerDao::class.java),
+    val currencySymbolDao: CurrencySymbolDao = get(CurrencySymbolDao::class.java),
+    val tickerThumbnailDao: TickerThumbnailDao = get(TickerThumbnailDao::class.java)
 ) {
 
     /**

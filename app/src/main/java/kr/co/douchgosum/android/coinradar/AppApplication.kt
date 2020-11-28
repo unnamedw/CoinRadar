@@ -12,10 +12,19 @@ import com.google.android.gms.ads.MobileAds
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.adapter
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kr.co.douchgosum.android.coinradar.data.db.AppDatabase
+import kr.co.douchgosum.android.coinradar.data.db.CurrencySymbol
 import kr.co.douchgosum.android.coinradar.di.*
 import kr.co.douchgosum.android.coinradar.utils.ConnectionStateMonitor
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.java.KoinJavaComponent.get
+import java.lang.reflect.Type
 
 class AppApplication: Application() {
     override fun onCreate() {
@@ -25,7 +34,7 @@ class AppApplication: Application() {
         MobileAds.initialize(this)
 
         //Firebase Config init
-//        initRemoteConfig()
+        initRemoteConfig()
 
         //Koin init
         startKoin {
@@ -51,8 +60,18 @@ class AppApplication: Application() {
                 val updated = task.result
                 Log.d("MyTag", "Config params updated: $updated")
                 Log.d("MyTag", "fetch succeed")
-                val string = remoteConfig.getString("lottery_data")
+                val string = remoteConfig.getString("currency_symbols")
                 Log.d("MyTag", "총 글자수: ${string.length}")
+                val symbolListType = Types.newParameterizedType(Map::class.java, String::class.java, String::class.java)
+                val symbolListAdapter = get(Moshi::class.java).adapter<Map<String, String>>(symbolListType)
+                val symbolList = symbolListAdapter.fromJson(string)?.map {
+                    CurrencySymbol(it.key, it.value)
+                } ?: emptyList()
+                val db = get(AppDatabase::class.java)
+                GlobalScope.launch {
+                    db.currencySymbolDao().insertAll(symbolList)
+                }
+                Log.d("MyTag", "Json: ${symbolList}")
             } else {
                 Log.d("MyTag", "fetch failed")
             }

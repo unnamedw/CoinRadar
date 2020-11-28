@@ -1,6 +1,7 @@
 package kr.co.douchgosum.android.coinradar.adapter
 
-import android.widget.ImageView
+import android.view.View
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.douchgosum.android.coinradar.R
 import kr.co.douchgosum.android.coinradar.data.db.Ticker
@@ -24,11 +25,62 @@ class TickerViewHolder(
 }
 
 class TickerTopViewHolder(
-    private val binding: ItemTickerTopBinding,
-    private val favoriteClickListener: TickerListAdapter.OnFavoriteClickListener?
+    binding: ItemTickerTopBinding,
+    private val topItemListener: TickerListAdapter.OnTopItemListener?
 ): RecyclerView.ViewHolder(binding.root) {
     init {
-        binding.ivFavorite.setOnClickListener { view ->
+        binding.apply {
+            setUpExchangeSpinner(spinExchange)
+            setUpCurrencySpinner(spinCurrency)
+            setUpSearch(etSearch)
+            setUpFavorite(ivFavorite)
+        }
+    }
+
+    fun bind(item: Ticker) {}
+
+    private fun setUpExchangeSpinner(spin: Spinner) {
+        ArrayAdapter.createFromResource(
+            spin.context,
+            R.array.exchanges_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spin.adapter = adapter
+        }
+
+        spin.also { spinner ->
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+                override fun onItemSelected(adapter: AdapterView<*>?, v: View?, position: Int, id: Long) {
+                    topItemListener?.let { listener ->
+                        listener.onExchangeChanged(adapter?.getItemAtPosition(position) as String)
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setUpCurrencySpinner(spin: Spinner) {
+        val adapter = ArrayAdapter.createFromResource(
+            spin.context,
+            R.array.bithumb_currencies_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spin.adapter = adapter
+        }
+
+    }
+
+    private fun setUpSearch(et: EditText) {
+
+    }
+
+    private fun setUpFavorite(fav: ImageView) {
+        fav.setOnClickListener { view ->
             val iv = view as ImageView
             if (iv.tag == true) {
                 iv.setImageResource(R.drawable.ic_baseline_star_border_24)
@@ -38,10 +90,9 @@ class TickerTopViewHolder(
                 iv.setImageResource(R.drawable.ic_baseline_star_24)
                 iv.tag = true
             }
-            favoriteClickListener?.onFavoriteClicked(iv.tag as Boolean)
+            topItemListener?.onFavoriteClicked(iv.tag as Boolean)
         }
     }
-    fun bind(item: Ticker) {}
 }
 
 class TickerHolderViewHolder(

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.info.InfoFragment">
+    tools:context=".ui.setting.SettingFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_setting"
@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
-            android:text="@string/bottom_menu_info_title" />
+            android:text="@string/bottom_menu_setting_title" />
     </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>

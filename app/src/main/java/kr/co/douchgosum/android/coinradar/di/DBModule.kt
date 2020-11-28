@@ -1,8 +1,7 @@
 package kr.co.douchgosum.android.coinradar.di
 
 import kr.co.douchgosum.android.coinradar.data.db.AppDatabase
-import kr.co.douchgosum.android.coinradar.data.repository.BithumbRepository
-import kr.co.douchgosum.android.coinradar.data.repository.CoinGeckoRepository
+import kr.co.douchgosum.android.coinradar.data.repository.*
 import org.koin.dsl.module
 
 /**
@@ -10,6 +9,7 @@ import org.koin.dsl.module
  *
  * */
 val dbModule = module {
+
     /**
      * Database
      * */
@@ -20,11 +20,17 @@ val dbModule = module {
      * */
     single { get<AppDatabase>().tickerDao() }
     single { get<AppDatabase>().exchangeDao() }
+    single { get<AppDatabase>().currencySymbolDao() }
+    single { get<AppDatabase>().tickerThumnailDao() }
 
     /**
      * Repositories
      * */
-    single { BithumbRepository(get(), get(), get()) }
-    single { CoinGeckoRepository(get(), get(), get()) }
+    single { BithumbRepository(get()) }
+    single { CoinGeckoRepository(get()) }
+    single { CoinoneRepository(get()) }
+    single { GopaxRepository(get()) }
+    single { HuobiRepository(get()) }
+    single { UpbitRepository(get()) }
 
 }

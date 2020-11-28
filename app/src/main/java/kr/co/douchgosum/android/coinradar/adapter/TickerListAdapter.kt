@@ -20,27 +20,33 @@ class TickerListAdapter: ListAdapter<Ticker, RecyclerView.ViewHolder>(TickerDiff
      * View Type
      * */
     companion object {
-        const val TYPE_TOP = 0
-        const val TYPE_HOLDER = 1
-        const val TYPE_EMPTY = 2
-        const val TYPE_LIST = 3
+        const val POSITION_TOP = 0
+        const val POSITION_HOLDER = 1
+        const val POSITION_EMPTY = 2
+
+        const val TYPE_TOP = 100
+        const val TYPE_HOLDER = 101
+        const val TYPE_EMPTY = 102
+        const val TYPE_LIST = 103
     }
 
-    lateinit var favoriteClickListener: OnFavoriteClickListener
+    private lateinit var holderView: View
+    private lateinit var headerItemListener: OnTopItemListener
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
-            0 -> TYPE_TOP
-            1 -> TYPE_HOLDER
-            2 -> TYPE_EMPTY
-            else -> TYPE_LIST }
+            POSITION_TOP -> TYPE_TOP
+            POSITION_HOLDER -> TYPE_HOLDER
+            POSITION_EMPTY -> TYPE_EMPTY
+            else -> TYPE_LIST
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             TYPE_TOP -> TickerTopViewHolder(
                 ItemTickerTopBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                favoriteClickListener)
+                headerItemListener)
             TYPE_HOLDER -> TickerHolderViewHolder(
                 ItemTickerHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             TYPE_EMPTY -> TickerEmptyViewHolder(
@@ -53,9 +59,9 @@ class TickerListAdapter: ListAdapter<Ticker, RecyclerView.ViewHolder>(TickerDiff
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val ticker = getItem(position)
         when(position) {
-            TYPE_TOP -> (holder as TickerTopViewHolder).bind(ticker)
-            TYPE_HOLDER -> (holder as TickerHolderViewHolder).bind(ticker)
-            TYPE_EMPTY -> (holder as TickerEmptyViewHolder).bind(ticker)
+            POSITION_TOP -> (holder as TickerTopViewHolder).bind(ticker)
+            POSITION_HOLDER -> (holder as TickerHolderViewHolder).bind(ticker)
+            POSITION_EMPTY -> (holder as TickerEmptyViewHolder).bind(ticker)
             else -> (holder as TickerViewHolder).bind(ticker)
         }
     }
@@ -76,34 +82,31 @@ class TickerListAdapter: ListAdapter<Ticker, RecyclerView.ViewHolder>(TickerDiff
         super.submitList(newList)
     }
 
-    private var holderView: View? = null
-    fun getHolderViewOrNull(list: RecyclerView, position: Int): View? {
-//        val lastIndex = if (position < itemCount) position else itemCount-1
-//        for (index in lastIndex downTo 0) {
-//            if (index == TYPE_HOLDER) {
-//                return LayoutInflater.from(list.context).inflate(R.layout.item_ticker_holder, list, false)
-//            }
-//        }
-//        return null
-        if (position >= TYPE_HOLDER) {
-            if (holderView == null) {
-                holderView = LayoutInflater.from(list.context).inflate(R.layout.item_ticker_holder, list, false)
+    fun getHolderViewOrNull(rv: RecyclerView, position: Int): View? {
+        if (position >= POSITION_HOLDER) {
+            if (!::holderView.isInitialized) {
+                holderView = LayoutInflater.from(rv.context).inflate(R.layout.item_ticker_holder, rv, false)
             }
+            return holderView
         }
-        else {
-            holderView = null
-        }
-        return holderView
+        return null
     }
 
     fun isHolder(position: Int): Boolean {
-        return position == TYPE_HOLDER
+        return position == POSITION_HOLDER
     }
 
-    interface OnFavoriteClickListener {
+    fun setOnHeaderItemListener(listener: OnTopItemListener) {
+        this.headerItemListener = listener
+    }
+
+    interface OnTopItemListener {
+        fun onExchangeChanged(exchange: String)
+        fun onCurrencyChanged(currency: String)
         fun onFavoriteClicked(isFavorite: Boolean)
+        fun onSearchClicked(text: String)
+        fun onTextChanged(text: String)
     }
-
 }
 
 class TickerDiffCallback: DiffUtil.ItemCallback<Ticker>() {

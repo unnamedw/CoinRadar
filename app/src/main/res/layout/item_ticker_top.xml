@@ -15,6 +15,8 @@
             android:layout_height="0dp"
             android:hint="거래소"
             android:textSize="@dimen/ticker_default_text_size"
+            android:gravity="end"
+            android:paddingStart="20dp"
             app:layout_constraintWidth_percent="0.5"
             app:layout_constraintDimensionRatio="5:1"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +43,7 @@
             app:layout_constraintStart_toEndOf="@id/spin_currency"
             app:layout_constraintBottom_toBottomOf="@id/spin_exchange"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/colorAccent" />
+            app:tint="@color/colorPrimary" />
         <EditText
             android:id="@+id/et_search"
             android:layout_width="0dp"

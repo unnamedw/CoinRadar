@@ -3,7 +3,7 @@ package kr.co.douchgosum.android.coinradar.data.remote.gopax
 import retrofit2.http.GET
 
 
-interface GopaxApiService {
+interface GopaxApiService{
 
 
 /**

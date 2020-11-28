@@ -25,14 +25,15 @@ data class HuobiTicker(
         val close = close
         val flucPrice = close-open
         val flucRate = if (flucPrice!=0.0) flucPrice/open else 0.0
-        return Ticker(
-            baseSymbol = dividedSymbol[0],
-            quoteSymbol = dividedSymbol[1],
-            currentPrice = close,
-            timeStamp = timestamp,
-            fluctuatePrice24H = flucPrice,
+        return Ticker.Builder().apply {
+            baseSymbol = dividedSymbol[0]
+            quoteSymbol = dividedSymbol[1]
+            currentPrice = close
+            timeStamp = timestamp
+            fluctuatePrice24H = flucPrice
             fluctuateRate24H = flucRate
-        )
+            exchange = "huobi"
+        }.build()
     }
 
     private fun divideHuobiSymbol(symbol: String): List<String> {

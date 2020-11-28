@@ -34,16 +34,17 @@ data class CoinGeckoTicker(
     @Json(name = "last_updated") val lastUpdated: String?
 ) {
 
-    fun toTicker(currency: String): Ticker = Ticker(
-        baseSymbol = symbol ?: "",
-        quoteSymbol = currency,
-        currentPrice = currentPrice ?: 0.0,
-        timeStamp = utcTimeMillis(lastUpdated ?: ""),
-        fluctuatePrice24H = priceChange24H ?: 0.0,
-        fluctuateRate24H = priceChangePercentage24H ?: 0.0,
-        image = image ?: "",
+    fun toTicker(currency: String?): Ticker = Ticker.Builder().apply {
+        baseSymbol = symbol ?: ""
+        quoteSymbol = currency ?: ""
+        currentPrice = this@CoinGeckoTicker.currentPrice ?: 0.0
+        timeStamp = utcTimeMillis(lastUpdated ?: "")
+        fluctuatePrice24H = priceChange24H ?: 0.0
+        fluctuateRate24H = priceChangePercentage24H ?: 0.0
+        image = this@CoinGeckoTicker.image ?: ""
         name = id ?: ""
-    )
+        exchange = "coingecko"
+    }.build()
 
     private fun utcTimeMillis(utc: String): Long {
         val utcStr = utc.toLowerCase(Locale.ROOT)

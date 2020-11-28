@@ -22,14 +22,15 @@ data class GopaxTicker(
         val close = close
         val flucPrice = close-open
         val flucRate = if (flucPrice!=0.0) flucPrice/open else 0.0
-        return Ticker(
-            baseSymbol = currency[0],
-            quoteSymbol = currency[1],
-            currentPrice = close,
-            timeStamp = timeStamp,
-            fluctuatePrice24H = close-open,
+        return Ticker.Builder().apply {
+            baseSymbol = currency[0]
+            quoteSymbol = currency[1]
+            currentPrice = close
+            this.timeStamp = timeStamp
+            fluctuatePrice24H = close-open
             fluctuateRate24H = flucRate
-        )
+            exchange = "gopax"
+        }.build()
     }
 
     private fun utcTimeMillis(utc: String): Long {
