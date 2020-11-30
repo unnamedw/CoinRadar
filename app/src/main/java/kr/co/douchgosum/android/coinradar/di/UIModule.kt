@@ -21,7 +21,7 @@ val viewModelModule = module {
     }
 
     viewModel {
-        TickerViewModel()
+        TickerViewModel(get())
     }
 
 }

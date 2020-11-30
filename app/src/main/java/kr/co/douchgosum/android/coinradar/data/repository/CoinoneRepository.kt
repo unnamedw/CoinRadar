@@ -4,13 +4,14 @@ import com.squareup.moshi.Moshi
 import kr.co.douchgosum.android.coinradar.data.remote.coinone.CoinoneApiService
 import kr.co.douchgosum.android.coinradar.data.remote.coinone.CoinoneTicker
 import kr.co.douchgosum.android.coinradar.data.db.Ticker
+import kr.co.douchgosum.android.coinradar.data.db.TickerWithSymbolAndThumbnail
 import org.koin.java.KoinJavaComponent.get
 
 class CoinoneRepository(
     private val coinoneApiService: CoinoneApiService
 ): Repository() {
 
-    suspend fun getAllTickers(): List<Ticker> {
+    suspend fun getAllTickers(): List<TickerWithSymbolAndThumbnail> {
         var tickerList = emptyList<Ticker>()
         if (isNetworkAvailable()) {
             val adapter = moshi.adapter(CoinoneTicker::class.java)
@@ -33,6 +34,6 @@ class CoinoneRepository(
                 }
             }
         }
-        return tickerList
+        return tickerDao.getAllTickers()
     }
 }

@@ -6,13 +6,15 @@ import kr.co.douchgosum.android.coinradar.data.remote.bithumb.BithumbApiService
 import kr.co.douchgosum.android.coinradar.data.db.TickerDao
 import kr.co.douchgosum.android.coinradar.data.remote.bithumb.BithumbTicker
 import kr.co.douchgosum.android.coinradar.data.db.Ticker
+import kr.co.douchgosum.android.coinradar.data.db.TickerWithSymbol
+import kr.co.douchgosum.android.coinradar.data.db.TickerWithSymbolAndThumbnail
 import org.koin.java.KoinJavaComponent.get
 
 class BithumbRepository(
     private val bithumbApiService: BithumbApiService
 ): Repository() {
 
-    suspend fun getAllTickers(): List<Ticker> {
+    suspend fun getAllTickers(): List<TickerWithSymbolAndThumbnail> {
         if (isNetworkAvailable()) {
             fetchTickerData()
         }
@@ -36,6 +38,10 @@ class BithumbRepository(
                 tickerDao.insertAll(data)
             }
         }
+    }
+
+    suspend fun getAllTickerWithSymbols(): List<TickerWithSymbol> {
+        return tickerDao.getAllTickerWithSymbols()
     }
 
 }

@@ -1,11 +1,9 @@
 package kr.co.douchgosum.android.coinradar.ui.home
 
 import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kr.co.douchgosum.android.coinradar.data.db.Ticker
+import kr.co.douchgosum.android.coinradar.data.db.TickerWithSymbolAndThumbnail
 import kr.co.douchgosum.android.coinradar.data.repository.*
 import java.lang.Exception
 
@@ -13,8 +11,8 @@ class TickerViewModel(
     private val repository: BithumbRepository
 ): ViewModel(), LifecycleEventObserver {
     private var shouldUpdate = false
-    private val _tickers = MutableLiveData<List<Ticker>>()
-    val tickers: LiveData<List<Ticker>>
+    private val _tickers = MutableLiveData<List<TickerWithSymbolAndThumbnail>>()
+    val tickers: LiveData<List<TickerWithSymbolAndThumbnail>>
         get() = _tickers
 
     private fun startUpdate() = viewModelScope.launch {
@@ -26,6 +24,7 @@ class TickerViewModel(
                     synchronized(_tickers) {
                         _tickers.postValue(data)
                     }
+                    println("MyTest ${repository.getAllTickerWithSymbols()}")
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -51,8 +50,6 @@ class TickerViewModel(
             else -> {}
         }
     }
-
-
 
     class TickerViewModelFactory(
         private val repository: BithumbRepository

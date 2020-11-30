@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.channels.ticker
 import kr.co.douchgosum.android.coinradar.R
 import kr.co.douchgosum.android.coinradar.data.db.Ticker
+import kr.co.douchgosum.android.coinradar.data.db.TickerWithSymbolAndThumbnail
 import kr.co.douchgosum.android.coinradar.databinding.ItemTickerBinding
 import kr.co.douchgosum.android.coinradar.databinding.ItemTickerEmptyBinding
 import kr.co.douchgosum.android.coinradar.databinding.ItemTickerHolderBinding
 import kr.co.douchgosum.android.coinradar.databinding.ItemTickerTopBinding
 
-class TickerListAdapter: ListAdapter<Ticker, RecyclerView.ViewHolder>(TickerDiffCallback()) {
+class TickerListAdapter: ListAdapter<TickerWithSymbolAndThumbnail, RecyclerView.ViewHolder>(TickerDiffCallback()) {
     /**
      * View Type
      * */
@@ -31,7 +32,6 @@ class TickerListAdapter: ListAdapter<Ticker, RecyclerView.ViewHolder>(TickerDiff
     }
 
     private lateinit var holderView: View
-    private lateinit var headerItemListener: OnTopItemListener
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
@@ -45,8 +45,7 @@ class TickerListAdapter: ListAdapter<Ticker, RecyclerView.ViewHolder>(TickerDiff
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             TYPE_TOP -> TickerTopViewHolder(
-                ItemTickerTopBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                headerItemListener)
+                ItemTickerTopBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             TYPE_HOLDER -> TickerHolderViewHolder(
                 ItemTickerHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             TYPE_EMPTY -> TickerEmptyViewHolder(
@@ -70,8 +69,8 @@ class TickerListAdapter: ListAdapter<Ticker, RecyclerView.ViewHolder>(TickerDiff
      * 받아 온 Item List 에
      * Top, Holder, Empty 포지션을 위한 3개의 더미 아이템을 삽입한다.
      * */
-    override fun submitList(list: List<Ticker>?) {
-        val newList = mutableListOf<Ticker>()
+    override fun submitList(list: List<TickerWithSymbolAndThumbnail>?) {
+        val newList = mutableListOf<TickerWithSymbolAndThumbnail>()
         list?.let {
             if (list.isEmpty())
                 return
@@ -95,26 +94,16 @@ class TickerListAdapter: ListAdapter<Ticker, RecyclerView.ViewHolder>(TickerDiff
     fun isHolder(position: Int): Boolean {
         return position == POSITION_HOLDER
     }
-
-    fun setOnHeaderItemListener(listener: OnTopItemListener) {
-        this.headerItemListener = listener
-    }
-
-    interface OnTopItemListener {
-        fun onExchangeChanged(exchange: String)
-        fun onCurrencyChanged(currency: String)
-        fun onFavoriteClicked(isFavorite: Boolean)
-        fun onSearchClicked(text: String)
-        fun onTextChanged(text: String)
-    }
 }
 
-class TickerDiffCallback: DiffUtil.ItemCallback<Ticker>() {
-    override fun areItemsTheSame(oldItem: Ticker, newItem: Ticker): Boolean {
-        return oldItem.id == newItem.id
+class TickerDiffCallback: DiffUtil.ItemCallback<TickerWithSymbolAndThumbnail>() {
+    override fun areItemsTheSame(oldItem: TickerWithSymbolAndThumbnail, newItem: TickerWithSymbolAndThumbnail): Boolean {
+        return oldItem.ticker.baseSymbol == newItem.ticker.baseSymbol &&
+                oldItem.ticker.quoteSymbol == newItem.ticker.quoteSymbol &&
+                oldItem.ticker.exchange == newItem.ticker.exchange
     }
 
-    override fun areContentsTheSame(oldItem: Ticker, newItem: Ticker): Boolean {
+    override fun areContentsTheSame(oldItem: TickerWithSymbolAndThumbnail, newItem: TickerWithSymbolAndThumbnail): Boolean {
         return oldItem == newItem
     }
 }

@@ -2,6 +2,9 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <variable
+            name="vm"
+            type="kr.co.douchgosum.android.coinradar.ui.home.TickerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,10 +16,10 @@
             android:id="@+id/spin_exchange"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:hint="거래소"
             android:textSize="@dimen/ticker_default_text_size"
             android:gravity="end"
             android:paddingStart="20dp"
+            android:paddingEnd="10dp"
             app:layout_constraintWidth_percent="0.5"
             app:layout_constraintDimensionRatio="5:1"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +29,6 @@
             android:id="@+id/spin_currency"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:hint="통화"
             android:textSize="@dimen/ticker_default_text_size"
             app:layout_constraintWidth_percent="0.3"
             app:layout_constraintStart_toEndOf="@id/spin_exchange"

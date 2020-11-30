@@ -12,28 +12,28 @@ class HomeViewModel(
     private val repository: BithumbRepository
 ): ViewModel(), LifecycleEventObserver {
 
-    private var isUpdating = false
-
-    private val _tickers = MutableLiveData<List<Ticker>>()
-    val tickers: LiveData<List<Ticker>>
-        get() = _tickers
-
-    private fun startUpdate() = viewModelScope.launch {
-        isUpdating = true
-        while (isUpdating) {
-            try {
-                _tickers.value = repository.getAllTickers()
-//                _tickers.value = repository.getAllTickers("").toList()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            delay(3000)
-        }
-    }
-
-    private fun stopUpdate() {
-        isUpdating = false
-    }
+//    private var isUpdating = false
+//
+//    private val _tickers = MutableLiveData<List<Ticker>>()
+//    val tickers: LiveData<List<Ticker>>
+//        get() = _tickers
+//
+//    private fun startUpdate() = viewModelScope.launch {
+//        isUpdating = true
+//        while (isUpdating) {
+//            try {
+//                _tickers.value = repository.getAllTickers()
+////                _tickers.value = repository.getAllTickers("").toList()
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+//            delay(3000)
+//        }
+//    }
+//
+//    private fun stopUpdate() {
+//        isUpdating = false
+//    }
 
     /**
      * Fragment 생명주기에 따른 이벤트 설정

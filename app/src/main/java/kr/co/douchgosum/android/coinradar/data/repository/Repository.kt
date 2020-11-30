@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.squareup.moshi.Moshi
-import kr.co.douchgosum.android.coinradar.data.db.CurrencySymbolDao
+import kr.co.douchgosum.android.coinradar.data.db.TickerSymbolDao
 import kr.co.douchgosum.android.coinradar.data.db.TickerThumbnailDao
 import kr.co.douchgosum.android.coinradar.data.db.TickerDao
 import org.koin.java.KoinJavaComponent.get
@@ -19,7 +19,7 @@ abstract class Repository(
     private val context: Context = get(Context::class.java),
     val moshi: Moshi = get(Moshi::class.java),
     val tickerDao: TickerDao = get(TickerDao::class.java),
-    val currencySymbolDao: CurrencySymbolDao = get(CurrencySymbolDao::class.java),
+    val tickerSymbolDao: TickerSymbolDao = get(TickerSymbolDao::class.java),
     val tickerThumbnailDao: TickerThumbnailDao = get(TickerThumbnailDao::class.java)
 ) {
 

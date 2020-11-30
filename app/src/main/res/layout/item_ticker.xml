@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="ticker"
-            type="kr.co.douchgosum.android.coinradar.data.db.Ticker"/>
+            name="data"
+            type="kr.co.douchgosum.android.coinradar.data.db.TickerWithSymbolAndThumbnail"/>
         <import type="android.view.Gravity"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="12dp"
-            srcUrl="@{ticker.image}"
+            srcUrl="@{data.thumbnail.imgUrl}"
             app:layout_constraintWidth_percent="0.15"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,11 +29,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textColor="@color/colorBlack"
-            android:text="@{ticker.name}"
+            android:text="@{data.symbol.name}"
             android:textStyle="bold"
-            android:gravity="start"
-            android:textSize="@dimen/ticker_name_text_size"
-            app:layout_constraintWidth_percent="0.15"
+            android:gravity="start|bottom"
+            android:maxLines="1"
+            app:autoSizeMaxTextSize="@dimen/ticker_name_text_size"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintWidth_percent="0.2"
             app:layout_constraintBottom_toTopOf="@id/tv_ticker_symbol"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_ticker_icon" />
@@ -43,10 +45,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textColor="@color/colorBlack"
-            android:text="@{ticker.baseSymbol}"
-            android:gravity="start"
+            android:text="@{data.ticker.baseSymbol}"
+            android:gravity="start|top"
             android:textSize="@dimen/ticker_symbol_text_size"
-            app:layout_constraintWidth_percent="0.15"
+            app:layout_constraintEnd_toEndOf="@id/tv_ticker_name"
             app:layout_constraintTop_toBottomOf="@id/tv_ticker_name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_ticker_icon" />
@@ -56,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textColor="@color/colorBlack"
-            android:text='@{ticker.toFormattedString(ticker.currentPrice)}'
+            price="@{data.ticker.currentPrice}"
             android:textStyle="bold"
             android:gravity="end|center_vertical"
             android:textSize="@dimen/ticker_price_text_size"
@@ -70,12 +72,11 @@
             android:id="@+id/tv_ticker_fluc_rate"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:textColor='@{ticker.fluctuateRate24H>0 ? @color/colorRed : (ticker.fluctuateRate24H&lt;0 ? @color/colorBlue : @color/colorBlack)}'
-            android:text='@{(ticker.fluctuateRate24H!=0 ? (ticker.fluctuateRate24H>0 ? @string/arrow_up+"+" : @string/arrow_down+"") + String.format("%.2f", ticker.fluctuateRate24H) + "%" : "(N/A)") + ""}'
+            flucRate="@{data.ticker.fluctuateRate24H}"
             android:textStyle="bold"
             android:gravity='end|bottom'
             android:textSize="@dimen/ticker_fluc_rate_text_size"
-            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintWidth_percent="0.25"
             app:layout_constraintBottom_toTopOf="@id/tv_ticker_fluc_price"
             app:layout_constraintStart_toEndOf="@id/tv_ticker_price"
             app:layout_constraintTop_toTopOf="parent" />
@@ -85,19 +86,17 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="end|top"
-            android:textColor='@{ticker.fluctuatePrice24H>0 ? @color/colorRed : (ticker.fluctuatePrice24H&lt;0 ? @color/colorBlue : @color/colorBlack)}'
-            android:text='@{ticker.fluctuatePrice24H!=0 ? (ticker.fluctuatePrice24H>0 ? "+" : "") + ticker.toFormattedString(ticker.fluctuatePrice24H) : " "}'
+            flucPrice="@{data.ticker.fluctuatePrice24H}"
             android:textSize="@dimen/ticker_fluc_price_text_size"
+            app:layout_constraintEnd_toEndOf="@id/tv_ticker_fluc_rate"
             app:layout_constraintTop_toBottomOf="@id/tv_ticker_fluc_rate"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_ticker_price"
-            app:layout_constraintWidth_percent="0.3"/>
+            app:layout_constraintStart_toEndOf="@id/tv_ticker_price" />
 
         <ImageView
             android:id="@+id/iv_arrow"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_ticker_fluc_rate"
             app:layout_constraintEnd_toEndOf="parent"

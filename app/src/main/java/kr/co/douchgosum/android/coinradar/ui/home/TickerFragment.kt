@@ -63,17 +63,12 @@ class TickerFragment : BaseFragment() {
     private fun subscribeUi(adapter: TickerListAdapter) {
         viewModel.tickers.observe(viewLifecycleOwner) { tickers ->
             adapter.submitList(tickers)
-            tickers.filter {
-                it.baseSymbol.equals("btc", true)
-            }.map {
-                println("비트코인: ${it.currentPrice} / ${dateFromTimeMillis(it.timeStamp)}")
-            }
         }
     }
 
     private fun setUpRecyclerView(rv: RecyclerView) {
         val sectionItemDecoration = RecyclerSectionItemDecoration(sectionCallback)
-        rvAdapter.setOnHeaderItemListener(topItemListener)
+//        rvAdapter.setOnHeaderItemListener(topItemListener)
         rv.adapter = rvAdapter
         rv.addItemDecoration(sectionItemDecoration)
         // 아이템 갱신 시 깜빡임 방지
@@ -89,27 +84,27 @@ class TickerFragment : BaseFragment() {
         }
     }
 
-    private val topItemListener = object : TickerListAdapter.OnTopItemListener {
-        override fun onExchangeChanged(exchange: String) {
-            val sample = if (rvAdapter.itemCount>0) rvAdapter.currentList[0].exchange else null
-            println("거래소: ${sample?.equals(exchange, true)}")
-        }
-
-        override fun onCurrencyChanged(currency: String) {
-
-        }
-
-        override fun onFavoriteClicked(isFavorite: Boolean) {
-
-        }
-
-        override fun onSearchClicked(text: String) {
-
-        }
-
-        override fun onTextChanged(text: String) {
-
-        }
-    }
+//    private val topItemListener = object : TickerListAdapter.OnTopItemListener {
+//        override fun onExchangeChanged(exchange: String) {
+//            val sample = if (rvAdapter.itemCount>0) rvAdapter.currentList[0].exchange else null
+//            println("거래소: ${sample?.equals(exchange, true)}")
+//        }
+//
+//        override fun onCurrencyChanged(currency: String) {
+//
+//        }
+//
+//        override fun onFavoriteClicked(isFavorite: Boolean) {
+//
+//        }
+//
+//        override fun onSearchClicked(text: String) {
+//
+//        }
+//
+//        override fun onTextChanged(text: String) {
+//
+//        }
+//    }
 
 }

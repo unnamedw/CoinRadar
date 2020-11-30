@@ -41,8 +41,6 @@ data class CoinGeckoTicker(
         timeStamp = utcTimeMillis(lastUpdated ?: "")
         fluctuatePrice24H = priceChange24H ?: 0.0
         fluctuateRate24H = priceChangePercentage24H ?: 0.0
-        image = this@CoinGeckoTicker.image ?: ""
-        name = id ?: ""
         exchange = "coingecko"
     }.build()
 

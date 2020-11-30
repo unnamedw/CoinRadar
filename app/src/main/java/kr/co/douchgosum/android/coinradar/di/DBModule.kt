@@ -20,7 +20,7 @@ val dbModule = module {
      * */
     single { get<AppDatabase>().tickerDao() }
     single { get<AppDatabase>().exchangeDao() }
-    single { get<AppDatabase>().currencySymbolDao() }
+    single { get<AppDatabase>().tickerSymbolDao() }
     single { get<AppDatabase>().tickerThumnailDao() }
 
     /**

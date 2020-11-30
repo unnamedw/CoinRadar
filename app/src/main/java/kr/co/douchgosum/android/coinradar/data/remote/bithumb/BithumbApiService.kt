@@ -13,6 +13,4 @@ interface BithumbApiService {
     suspend fun getTickers(
         @Path("order_payment") orderPayment: String = "all_krw"
     ): BithumbTickerResponse
-
-
 }
