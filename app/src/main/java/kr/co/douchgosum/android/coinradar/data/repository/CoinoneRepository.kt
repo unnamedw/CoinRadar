@@ -11,7 +11,7 @@ class CoinoneRepository(
     private val coinoneApiService: CoinoneApiService
 ): Repository() {
 
-    suspend fun getAllTickers(): List<TickerWithSymbolAndThumbnail> {
+    suspend fun getAllTickers(): List<Ticker> {
         var tickerList = emptyList<Ticker>()
         if (isNetworkAvailable()) {
             val adapter = moshi.adapter(CoinoneTicker::class.java)

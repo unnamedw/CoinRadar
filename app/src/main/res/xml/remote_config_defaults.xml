@@ -6,8 +6,13 @@
 
 <defaultsMap>
     <entry>
-        <key>currency_symbols</key>
+        <key>coin_symbols_ko</key>
         <value>No Json Data</value>
     </entry>
+    <entry>
+        <key>coin_thumbnails</key>
+        <value>No Json Data</value>
+    </entry>
+
 </defaultsMap>
     <!-- END xml_defaults -->

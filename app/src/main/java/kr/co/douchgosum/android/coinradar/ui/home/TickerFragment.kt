@@ -34,6 +34,7 @@ class TickerFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(viewModel)
+        println("lifecycle onCreate")
     }
 
     override fun onCreateView(
@@ -63,6 +64,7 @@ class TickerFragment : BaseFragment() {
     private fun subscribeUi(adapter: TickerListAdapter) {
         viewModel.tickers.observe(viewLifecycleOwner) { tickers ->
             adapter.submitList(tickers)
+            println("Mydata $tickers")
         }
     }
 
@@ -106,5 +108,15 @@ class TickerFragment : BaseFragment() {
 //
 //        }
 //    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        println("lifecycle onDestroy")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        println("lifecycle onStart")
+    }
 
 }

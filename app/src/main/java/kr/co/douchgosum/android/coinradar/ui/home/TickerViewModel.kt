@@ -1,11 +1,12 @@
 package kr.co.douchgosum.android.coinradar.ui.home
 
 import androidx.lifecycle.*
-import kotlinx.coroutines.*
-import kr.co.douchgosum.android.coinradar.data.db.Ticker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kr.co.douchgosum.android.coinradar.data.db.TickerWithSymbolAndThumbnail
-import kr.co.douchgosum.android.coinradar.data.repository.*
-import java.lang.Exception
+import kr.co.douchgosum.android.coinradar.data.repository.BithumbRepository
 
 class TickerViewModel(
     private val repository: BithumbRepository
@@ -20,11 +21,10 @@ class TickerViewModel(
         withContext(Dispatchers.IO) {
             while (shouldUpdate) {
                 try {
-                    val data = repository.getAllTickers()
+                    val data = repository.getAllTickerWithSymbolAndThumbnails()
                     synchronized(_tickers) {
                         _tickers.postValue(data)
                     }
-                    println("MyTest ${repository.getAllTickerWithSymbols()}")
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -32,6 +32,11 @@ class TickerViewModel(
             }
         }
     }
+
+    private suspend fun getTickerDataAsync() =
+        withContext(viewModelScope.coroutineContext) {
+            repository.getAllTickerWithSymbolAndThumbnails()
+        }
 
     private fun stopUpdate() {
         shouldUpdate = false

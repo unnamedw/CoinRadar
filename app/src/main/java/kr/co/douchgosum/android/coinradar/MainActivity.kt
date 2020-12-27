@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
 //            ViewGroup.LayoutParams.MATCH_PARENT)
         val newMenuItemView = LayoutInflater.from(this).inflate(R.layout.bottom_menu_radaritem, bottomNav, false)
         itemViewAtRadarViewPosition.addView(newMenuItemView)
+        // 재클릭시 기존 Fragment 가 다시 생성되는 것을 막고자 추가
+        bottomNav.setOnNavigationItemReselectedListener {}
 //        bottomNav.setOnNavigationItemSelectedListener {
 //            when(it.itemId) {
 //                R.id.bottom_menu_item3 -> {
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         //전면광고 표시
 //        showAd(R.string.admob_interstitialad_id)
+
     }
 
     /**

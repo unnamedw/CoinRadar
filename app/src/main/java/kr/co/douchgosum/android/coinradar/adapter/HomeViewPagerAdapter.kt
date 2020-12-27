@@ -10,7 +10,7 @@ const val SUB1_INDEX = 0
 const val SUB2_INDEX = 1
 const val SUB3_INDEX = 2
 
-class HomeViewPagerAdtaper(
+class HomeViewPagerAdapter(
     fragment: Fragment
 ): FragmentStateAdapter(fragment) {
 

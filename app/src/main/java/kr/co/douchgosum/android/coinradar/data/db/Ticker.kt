@@ -14,13 +14,13 @@ import kotlin.math.roundToInt
     primaryKeys = ["base_symbol", "quote_symbol", "exchange"],
     indices = [Index("base_symbol", unique = true)])
 data class Ticker (
-    @ColumnInfo(name = "base_symbol") val baseSymbol: String,
-    @ColumnInfo(name = "quote_symbol") val quoteSymbol: String,
+    @ColumnInfo(name = "base_symbol", collate = ColumnInfo.NOCASE) val baseSymbol: String,
+    @ColumnInfo(name = "quote_symbol", collate = ColumnInfo.NOCASE) val quoteSymbol: String,
     @ColumnInfo(name = "current_price") val currentPrice: Double,
     @ColumnInfo(name = "timestamp") val timeStamp: Long,
     @ColumnInfo(name = "fluctuate_price_24h") val fluctuatePrice24H: Double,
     @ColumnInfo(name = "fluctuate_rate_24h") val fluctuateRate24H: Double,
-    @ColumnInfo(name = "exchange") val exchange: String
+    @ColumnInfo(name = "exchange", collate = ColumnInfo.NOCASE) val exchange: String
 ) {
 //    @PrimaryKey(autoGenerate = true)
 //    @ColumnInfo(name = "id")

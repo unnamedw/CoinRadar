@@ -10,7 +10,7 @@ class CoinGeckoRepository(
     private val coinGeckoApiService: CoinGeckoApiService
 ): Repository() {
 
-    suspend fun getAllTickers(currency: String): List<TickerWithSymbolAndThumbnail> {
+    suspend fun getAllTickers(currency: String): List<Ticker> {
         if (isNetworkAvailable()) {
             coinGeckoApiService.getTickers().map { coinGeckoTicker ->
                 coinGeckoTicker.toTicker(currency)

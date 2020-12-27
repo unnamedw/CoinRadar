@@ -8,7 +8,7 @@ class GopaxRepository(
     private val gopaxApiService: GopaxApiService
 ): Repository() {
 
-    suspend fun getAllTickers(): List<TickerWithSymbolAndThumbnail> {
+    suspend fun getAllTickers(): List<Ticker> {
         var tickerList = emptyList<Ticker>()
         if (isNetworkAvailable()) {
              tickerList = gopaxApiService.getTickers().map { gopaxTicker ->

@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.squareup.moshi.Moshi
 import kr.co.douchgosum.android.coinradar.R
-import kr.co.douchgosum.android.coinradar.adapter.HomeViewPagerAdtaper
+import kr.co.douchgosum.android.coinradar.adapter.HomeViewPagerAdapter
 import kr.co.douchgosum.android.coinradar.adapter.SUB1_INDEX
 import kr.co.douchgosum.android.coinradar.adapter.SUB2_INDEX
 import kr.co.douchgosum.android.coinradar.adapter.SUB3_INDEX
@@ -35,7 +34,7 @@ class HomeFragment : BaseFragment() {
         tabLayout = binding.tabs
         viewPager = binding.homeViewPager
         viewPager.adapter =
-            HomeViewPagerAdtaper(this)
+            HomeViewPagerAdapter(this)
 
         // 각 Tab 설정
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
