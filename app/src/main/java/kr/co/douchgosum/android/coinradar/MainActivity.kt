@@ -17,6 +17,7 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun showBottomSheet() {
-        val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this@MainActivity)
+        val bottomSheetDialog = BottomSheetDialog(this@MainActivity)
         bottomSheetDialog.setContentView(R.layout.bottom_content)
         bottomSheetDialog.show()
     }
