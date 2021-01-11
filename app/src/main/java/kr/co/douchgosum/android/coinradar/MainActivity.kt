@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    fun showBottomSheet() {
+    private fun showBottomSheet() {
         val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this@MainActivity)
         bottomSheetDialog.setContentView(R.layout.bottom_content)
         bottomSheetDialog.show()
