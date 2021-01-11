@@ -97,9 +97,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * 바텀시트 표시
-     * */
+
     private fun showBottomSheet() {
         val bottomSheetDialog = BottomSheetDialog(this@MainActivity)
         bottomSheetDialog.setContentView(R.layout.bottom_content)
